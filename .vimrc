@@ -125,8 +125,8 @@ let g:vim_markdown_folding_disabled=1
 let g:EclimCompletionMethod = 'omnifunc'
 
 " Vim-auto-save
-let g:auto_save = 1
-let g:auto_save_in_insert_mode = 0
+"let g:auto_save = 1
+"let g:auto_save_in_insert_mode = 0
 
 " move swap files to tmp
 "set swapfile
@@ -144,12 +144,12 @@ set foldopen=all
 set foldlevel=1
 
 " JAVA SPECIFIC. TODO Separate in a file or something.
-map <c-t> :JUnit %
-map <c-o> :JavaImport
-iabbr sout System.out.println(
-au BufRead,BufNewFile *.jsp setfiletype html
+"map <c-t> :JUnit %
+"map <c-o> :JavaImport
+"iabbr sout System.out.println(
+"au BufRead,BufNewFile *.jsp setfiletype html
 
 " Run current script
 map <F1> :!%:p <CR> <CR>
 
-set clipboard=unnamedplusplus
+"set clipboard=unnamedplusplus

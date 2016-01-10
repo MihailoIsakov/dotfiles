@@ -129,5 +129,15 @@ setxkbmap -model pc105 -layout us,'rs(latin)' -option grp:alt_shift_toggle
 # History of all terminals
 #export PROMPT_COMMAND='history -a; history -r'
 
-source .bash_lxc
-source .bash_cuda
+source ~/.bash_lxc
+source ~/.bash_cuda
+
+# Virtualenvwrapper
+export WORKON_HOME=/home/mihailo/.virtualenvs
+export PROJECT_HOME=$HOME/development
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
+export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
+#source /usr/local/bin/virtualenvwrapper.sh 
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"

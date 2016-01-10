@@ -25,7 +25,8 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+BackSpace exec cloneterm
+bindsym $mod+Shift+Return exec clone_term.sh
+#bindsym $mod+BackSpace exec cloneterm
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -152,8 +153,10 @@ bindsym $mod+r mode "resize"
 
 # Primary. Bar hidden.
 bar {
-    status_command i3status
+    #status_command i3status
+    status_command python3 /home/mihailo/bin/status.py
 	position top
+    workspace_buttons yes
     #output eDP1
 }
 
@@ -222,7 +225,7 @@ bindsym $mod+plus scratchpad show
 bindsym $mod+Shift+plus move scratchpad
 
 # language toggle
-#exec --no-startup-id "setxkbmap -model pc105 -layout us,rs -option grp:alt_shift_toggle"
+exec --no-startup-id "setxkbmap -model pc105 -layout us,rs -option grp:alt_shift_toggle"
 
 # exec monitor-setup
 exec ~/.screenlayout/home.sh

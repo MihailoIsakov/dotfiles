@@ -19,6 +19,12 @@ alias lt='ll -t'
 alias ld='ls -la | grep "^d" && ls -la | grep "^-" && ls -la | grep "^l"'
 alias ltr='ll -tr'
 
+# Clone terminal
+alias cl='clone_term.sh'
+
+# vim
+alias vim='vim.gnome'
+
 # hide python pyc files
 alias lp='ls --hide="*.pyc"'
 
@@ -33,7 +39,7 @@ alias nemo='nemo --no-desktop'
 alias wifi='nm-applet &'
 
 # tools
-alias cat='pygmentize -g'
+alias pyg='pygmentize -g'
 alias chrome='google-chrome'
 alias open='gnome-open'
 alias xclip='xclip -sel clip'
