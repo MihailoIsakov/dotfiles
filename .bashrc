@@ -104,6 +104,8 @@ source ~/bin/rename_terminal.sh
 
 # vim modes
 set -o vi
+set editing-mode vi
+set keymap vi-command
 
 #case insensitive autocomplete
 bind "set completion-ignore-case on"
@@ -111,14 +113,23 @@ bind "set completion-ignore-case on"
 #cd without cd <3
 shopt -s autocd
 
+# tab autocompletion
+#bind '"\t":menu-complete'
+
 # color the cursor for better visibility
 # echo -ne '\e]12;orange\a'
 
 # Monitor fuckup
 #xrandr --addmode eDP1 "1920x1080"
 
+# Allow clicking on the touchpad
+xinput enable 13
+
 # language toggle
 setxkbmap -model pc105 -layout us,'rs(latin)' -option grp:alt_shift_toggle
+
+# faster keyboard
+xset r rate 200 30
 
 # Change the caps lock to escape
 #if [ -n "${DISPLAY+x}" ]; then
@@ -129,7 +140,6 @@ setxkbmap -model pc105 -layout us,'rs(latin)' -option grp:alt_shift_toggle
 # History of all terminals
 #export PROMPT_COMMAND='history -a; history -r'
 
-source ~/.bash_lxc
 source ~/.bash_cuda
 
 # Virtualenvwrapper
@@ -140,4 +150,16 @@ export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
 #source /usr/local/bin/virtualenvwrapper.sh 
 
 ### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+#export PATH="/usr/local/heroku/bin:$PATH"
+
+#PATH="/home/mihailo/perl5/bin${PATH:+:${PATH}}"; export PATH;
+#PERL5LIB="/home/mihailo/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+#PERL_LOCAL_LIB_ROOT="/home/mihailo/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+#PERL_MB_OPT="--install_base \"/home/mihailo/perl5\""; export PERL_MB_OPT;
+#PERL_MM_OPT="INSTALL_BASE=/home/mihailo/perl5"; export PERL_MM_OPT;
+
+# pylearn2
+export PYLEARN2_DATA_PATH="/home/mihailo/development/datasets/pylearn"
+
+# run the planner, exit if todays plan already exists
+planner.py

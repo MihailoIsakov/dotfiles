@@ -19,6 +19,10 @@ alias lt='ll -t'
 alias ld='ls -la | grep "^d" && ls -la | grep "^-" && ls -la | grep "^l"'
 alias ltr='ll -tr'
 
+# random bash stuff
+alias wcl='wc -l'
+alias wcw='wc -w'
+
 # Clone terminal
 alias cl='clone_term.sh'
 
@@ -39,6 +43,7 @@ alias nemo='nemo --no-desktop'
 alias wifi='nm-applet &'
 
 # tools
+alias logout='gnome-session-logout'
 alias pyg='pygmentize -g'
 alias chrome='google-chrome'
 alias open='gnome-open'
@@ -54,10 +59,10 @@ alias gs='git status'
 alias diff='git diff'
 alias commit='git commit'
 alias add='git add'
-alias gs='git status'
 alias checkout='git checkout'
 alias pull='git pull'
 alias gtc='git show --name-only'
+alias push='git push origin master'
 
 # language specific tools
 alias ipy='ipython'
@@ -67,3 +72,7 @@ alias activate='source venv/bin/activate'
 
 #experimental
 alias ports='netstat -tulanp'
+alias pc='cls && pyg'
+
+#dorpbox
+alias db='dropbox'

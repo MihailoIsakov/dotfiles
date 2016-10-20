@@ -155,7 +155,7 @@ bindsym $mod+r mode "resize"
 bar {
     #status_command i3status
     status_command python3 /home/mihailo/bin/status.py
-	position top
+	position top 
     workspace_buttons yes
     #output eDP1
 }
@@ -186,10 +186,10 @@ exec --no-startup-id nm-applet
 # Sound manager
 exec --no-startup-id cinnamon-sound-applet
 # Backlight mappings
-#bindcode $mod+71 exec xbacklight - 10
-#bindcode $mod+72 exec xbacklight + 10
-bindcode $mod+F5 exec xbacklight - 10
-bindcode $mod+F6 exec xbacklight + 10
+bindcode 71 exec xbacklight - 10
+bindcode 72 exec xbacklight + 10
+#bindcode $mod+F5 exec xbacklight - 10
+#bindcode $mod+F6 exec xbacklight + 10
 # Print screen
 bindcode 107 exec scrot
 
@@ -202,8 +202,14 @@ bindsym $mod+Shift+s exec rofi -show ssh -i3 -lines 10 -sidebar-mode -fg "#9f9f9
 
 # Creates a new workspace on the current monitor. Autoincrements the workspace number
 bindsym $mod+Shift+w exec new-workspace.py
+
+# suspends
+bindsym $mod+Shift+p exec sudo pm-suspend
 # Locks i3
 bindsym $mod+Shift+o exec lock
+exec xautolock -time 5 -locker lock &
+
+
 # Rename workspace
 bindsym $mod+z exec rename-workspace.sh
 
@@ -220,6 +226,7 @@ bindsym F8 exec ~/bin/wifi-restart.sh
 # arrow key
 #bindcode Control+Shift+n exe
 
+
 # Scratchpad
 bindsym $mod+plus scratchpad show
 bindsym $mod+Shift+plus move scratchpad
@@ -229,3 +236,6 @@ exec --no-startup-id "setxkbmap -model pc105 -layout us,rs -option grp:alt_shift
 
 # exec monitor-setup
 exec ~/.screenlayout/home.sh
+
+# rename the workspaces :3
+exec_always --no-startup-id exec i3-renameworkspaces.pl

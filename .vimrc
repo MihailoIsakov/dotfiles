@@ -24,9 +24,9 @@ set nocompatible
 set nowrap
 
 " Indentation 
-set autoindent
-set smartindent
-set cindent
+"set autoindent
+"set smartindent
+"set cindent
  
 " intelligent comments
 set comments=sl:/*,mb:\ *,elx:\ */
@@ -47,7 +47,7 @@ nnoremap <leader><space> :nohlsearch<CR>
 syntax on 
  
 " Basic settings 
-filetype plugin indent on
+"filetype plugin indent on
  
 " Tab settings
 set tabstop=4
@@ -69,13 +69,15 @@ set hidden
  
 " Case insensitive search by default
 set ignorecase
+set smartcase
  
 " Pathogen runtimepath management
 execute pathogen#infect()
 execute pathogen#helptags()
  
 " Theme settings
-colorscheme molokai
+ colorscheme molokai
+"colorscheme dracula
 set t_Co=256
 let g:molokai_original = 1
 let g:rehash256 = 1
@@ -96,9 +98,13 @@ nnoremap <c-k> <c-y>
 nnoremap <c-j> <c-e>
 nnoremap B ^
 nnoremap E $
-nnoremap $ <nop>
-nnoremap ^ <nop>
+"nnoremap $ <nop>
+"nnoremap ^ <nop>
 nnoremap gV `[v`]
+
+" Indentation in visual mode
+vmap < <gv
+vmap > >gv
 
 " To allow walking over strings using _, something_like_this
 set iskeyword-=_
@@ -122,11 +128,11 @@ set relativenumber
 let g:vim_markdown_folding_disabled=1
 
 " Eclim autocomplete
-let g:EclimCompletionMethod = 'omnifunc'
+"let g:EclimCompletionMethod = 'omnifunc'
 
 " Vim-auto-save
-"let g:auto_save = 1
-"let g:auto_save_in_insert_mode = 0
+let g:auto_save = 1
+let g:auto_save_in_insert_mode = 0
 
 " move swap files to tmp
 "set swapfile
@@ -149,7 +155,28 @@ set foldlevel=1
 "iabbr sout System.out.println(
 "au BufRead,BufNewFile *.jsp setfiletype html
 
+" Python specific
+let g:syntastic_python_checkers=['flake8']
+autocmd FileType python map <buffer> <c-f> :call Flake8()<CR>
+let g:flake8_show_quickfix=0
+let g:flake8_show_in_file=1  " show
+" Disable line size checking
+autocmd BufWritePost *.py call Flake8()
+
 " Run current script
 map <F1> :!%:p <CR> <CR>
 
 "set clipboard=unnamedplusplus
+
+" CUDA
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+autocmd FileType cuda set ft=c.cuda
+
+" latex?
+noremap <buffer> <silent> k gk
+noremap <buffer> <silent> j gj
+noremap <buffer> <silent> 0 g0
+noremap <buffer> <silent> $ g$ 
+
+"set wrap lbr
+au Filetype tex set wrap lbr

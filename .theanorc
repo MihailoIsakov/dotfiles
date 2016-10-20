@@ -1,6 +1,8 @@
 [global]
 floatX = float32
 device = gpu0
+config.allow_gc=True
+config.scan.allow_output_prealloc =False
 
 [nvcc]
 fastmath = True
