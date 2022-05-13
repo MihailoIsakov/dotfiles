@@ -1,4 +1,4 @@
-sudo apt install vim-gtk nmap i3 arandr rofi python3-pip bash-completion flake8
+sudo apt install vim-gtk nmap i3 arandr rofi python3-pip bash-completion flake8 curl
 # sudo apt install nvidia-driver-495
 
 ###################################################
