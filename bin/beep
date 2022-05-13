@@ -1,0 +1,4 @@
+#! /bin/bash
+
+paplay /usr/share/sounds/freedesktop/stereo/window-question.oga
+

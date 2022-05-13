@@ -1,0 +1,14 @@
+chmod +x bin/*
+
+ln -s -f $(pwd)/bin/                   ~/
+ln -s -f $(pwd)/dotfiles/.profile      ~/
+ln -s -f $(pwd)/dotfiles/.bashrc       ~/
+ln -s -f $(pwd)/dotfiles/.vimrc        ~/
+ln -s -f $(pwd)/dotfiles/.sshrc        ~/
+ln -s -f $(pwd)/dotfiles/.inputrc      ~/
+ln -s -f $(pwd)/dotfiles/.bash_git     ~/
+ln -s -f $(pwd)/dotfiles/.bash_aliases ~/
+ln -s -f $(pwd)/dotfiles/.flake8       ~/
+
+mkdir -p ~/.config/i3/
+ln -s -f $(pwd)/dotfiles/i3_config     ~/.config/i3/config

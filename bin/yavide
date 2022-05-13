@@ -1,0 +1,2 @@
+#! /bin/bash
+gvim --servername yavide -f -N -u /opt/yavide/.vimrc
