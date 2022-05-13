@@ -5,6 +5,7 @@ ln -s -f $(pwd)/dotfiles/.profile      ~/
 ln -s -f $(pwd)/dotfiles/.bashrc       ~/
 ln -s -f $(pwd)/dotfiles/.vimrc        ~/
 ln -s -f $(pwd)/dotfiles/.sshrc        ~/
+ln -s -f $(pwd)/dotfiles/.xinitrc      ~/
 ln -s -f $(pwd)/dotfiles/.inputrc      ~/
 ln -s -f $(pwd)/dotfiles/.bash_git     ~/
 ln -s -f $(pwd)/dotfiles/.bash_aliases ~/
