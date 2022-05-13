@@ -9,3 +9,10 @@ pip install virtualenv virtualenvwrapper pipx
 
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
+
+
+##################
+# Setup dotfiles #
+##################
+mkdir -p ~/.config/i3/
+ln -s $(pwd)/dotfiles/i3_config ~/.config/i3/config
