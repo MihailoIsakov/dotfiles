@@ -1,6 +1,8 @@
 sudo apt install vim-gtk nmap i3 arandr rofi python3-pip bash-completion flake8 curl
 # sudo apt install nvidia-driver-495
 
+curl -L https://sw.kovidgoyal.net/kitty/installer.sh | /dev/stdin
+
 ###################################################
 # Use pipx or virtualenvwrapper whenever possible #
 ###################################################
