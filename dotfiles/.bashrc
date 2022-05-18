@@ -112,7 +112,14 @@ export EDITOR=vim
 
 # Bash Git setup 
 source ~/bin/git-completion.bash
-source ~/.bash_git
+# source ~/.bash_git
+function _update_ps1() {
+    PS1=$(powerline-shell $?)
+}
+
+if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
+    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+fi
 
 # vim modes
 set -o vi
@@ -126,7 +133,6 @@ echo -ne '\e]12;orange\a'
 #export PATH="$PATH:/home/mihailo/.local/bin"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
 
 
 # virtualenv

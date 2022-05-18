@@ -60,4 +60,9 @@ export TERMINAL=/home/mihailo/.local/kitty.app/bin/kitty
 export PATH=$PATH:/opt/riscv_ima/bin
 
 # Background
-xsetroot -solid "#700000"
+xsetroot -solid "#111111"
+
+# Should be in .xinitrc, but Wayland does not run it at startup?
+xmodmap -e "clear lock"
+xmodmap -e "keysym Caps_Lock = Escape" 
+
