@@ -1,7 +1,8 @@
 #! /bin/bash
 
 # Take a screenshot
-scrot /tmp/screen_locked.png
+# scrot /tmp/screen_locked.png
+gnome-screenshot -f /tmp/screen_locked.png
 
 # Pixellate it 10x
 #mogrify -scale 10% -scale 1000% /tmp/screen_locked.png
