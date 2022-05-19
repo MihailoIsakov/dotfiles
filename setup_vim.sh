@@ -12,6 +12,10 @@ vim -u NONE -c "helptags fugitive/doc" -c q
 git clone https://github.com/vim-airline/vim-airline ~/.vim/bundle/vim-airline
 git clone https://github.com/vim-airline/vim-airline-themes ~/.vim/bundle/vim-airline-themes
 
+# install NERD commenter
+cd ~/.vim/bundle/
+git clone https://github.com/preservim/nerdcommenter.git
+
 # install the molokai theme
 mkdir -p ~/.vim/colors
 curl ~/.vim/colors/molokai.vim https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim
