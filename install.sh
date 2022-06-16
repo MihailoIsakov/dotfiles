@@ -7,6 +7,7 @@ sudo apt install python3.10-venv
 # less essential
 sudo apt install gnome-screenshot i3blocks pm-utils mosh fonts-firacode pavucontrol
 # sudo apt install nvidia-driver-495
+sudo snap install libreoffice
 
 curl -L https://sw.kovidgoyal.net/kitty/installer.sh | /dev/stdin
 

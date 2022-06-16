@@ -223,7 +223,7 @@ map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                      Language specific 		     "
+"                      Language specific 		             "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Python specific
 let g:syntastic_python_checkers=['flake8']
@@ -244,3 +244,7 @@ autocmd BufWritePost *.c,*.h silent! !ctags . &
 
 let g:jedi#popup_on_dot = 0
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                      File specific 		                 "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+au FileType tex set spell
