@@ -23,3 +23,19 @@ curl ~/.vim/colors/molokai.vim https://raw.githubusercontent.com/tomasr/molokai/
 # install incsearch 
 git clone https://github.com/haya14busa/incsearch.vim ~/.vim/bundle/incsearch.vim
 
+# install easymotion
+git clone https://github.com/easymotion/vim-easymotion ~/.vim/bundle/vim-easymotion
+
+# install gitgutter
+git clone https://github.com/airblade/vim-gitgutter.git ~/.vim/bundle/vim-gitgutter
+
+# install YouCompleteMe
+sudo apt install build-essential cmake vim-nox python3-dev
+sudo apt install mono-complete golang nodejs default-jdk npm
+cd ~/.vim/bundle/
+git clone https://github.com/Valloric/YouCompleteMe.git
+cd YouCompleteMe
+git submodule update --init --recursive
+cd ~/.vim/bundle/YouCompleteMe
+python3 install.py --all
+
