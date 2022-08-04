@@ -110,6 +110,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# don't autocomplete hidden files
+bind 'set match-hidden-files off'
+
 export VISUAL=vim
 export EDITOR=vim
 
