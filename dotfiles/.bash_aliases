@@ -1,12 +1,10 @@
 # moving around
 alias cd='cd -P'
 alias ..='cd ..'
+alias ...='cd ../..'
 alias ..2='cd ../..'
+alias ....='cd ../../..'
 alias ..3='cd ../../..'
-alias ..4='cd ../../../..'
-alias ..5='cd ../../../../..'
-alias ..6='cd ../../../../../..'
-alias ..7='cd ../../../../../../..'
 
 # clear screen
 alias cls='printf "\033c"'
@@ -53,6 +51,14 @@ alias push='git push'
 alias ipy='ipython'
 alias activate='source venv/bin/activate'
 
-#experimental
-alias ports='netstat -tulanp'
+# experimental
+# alias ports='netstat -tulanp'
 
+# enable aliases in non-interactive shells like vim
+shopt -s expand_aliases
+
+# kitty clipboard
+alias cb='kitty +kitten clipboard'
+
+# kitty ssh
+alias s="kitty +kitten ssh"
