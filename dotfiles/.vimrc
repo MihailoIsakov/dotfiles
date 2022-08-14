@@ -1,8 +1,6 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                          Visuals                           "
+"                       Text editing                         "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set number
-set relativenumber
 
 " Start unwrapped                                                                                                       
 set nowrap                                                                                                                                  
@@ -10,6 +8,12 @@ set nowrap
 set textwidth=0                                                                                                         
 set wrapmargin=0  
 set nofixendofline
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                      Visuals / Theme                       "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set number
+set relativenumber
 
 " Syntax highlighting
 syntax on
@@ -19,9 +23,6 @@ set noshowmode
 
 " Switch buffers without saving
 set hidden
-
-" Fold background color
-hi Folded ctermbg=235
 
 " Theme settings
 colorscheme molokai
@@ -34,9 +35,7 @@ highlight nonText ctermbg=NONE
 
 " Airline tabs for open buffers -- Install tabline
 let g:airline#extensions#tabline#enabled = 1
-"set laststatus=2
-
-set guifont=DejaVu\ Sans:s12
+set laststatus=2
 
 " air-line
 let g:airline_powerline_fonts = 1
@@ -72,15 +71,20 @@ let g:airline_symbols.linenr = ''
 highlight nonascii guibg=Red ctermbg=1 term=standout
 au BufReadPost * syntax match nonascii "[^\u0000-\u007F]"
 
+
 " Kitty background stuff
-" let &t_ut=''
-
-
 " Disable Background Color Erase (BCE) so that color schemes
 " work properly when Vim is used inside tmux and GNU screen.
-" if &term =~ '256color'
-"     set t_ut=
-" endif
+if &term =~ '256color'
+    set t_ut=
+endif
+
+" Fold background color
+hi Folded ctermbg=235
+
+" Autocomplete background color
+hi CocMenuSel ctermbg=yellow ctermfg=black
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                         Keybindings                        "
@@ -102,7 +106,7 @@ vmap < <gv
 vmap > >gv
 
 " To allow walking over strings using _, something_like_this
-" set iskeyword-=_
+set iskeyword-=_
 
 " Center line in Normal mode
 nmap <space> zz
@@ -126,6 +130,7 @@ vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 map <c-n> :bn<CR>
 map <c-p> :bp<CR>
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                     Low level behavior                     "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -135,9 +140,11 @@ set ttimeoutlen=50
 " Reload .vimrc if changed
 autocmd! bufwritepost .vimrc source %
 
-" Don't wipe clipboard when exiting vim 
+" When exiting vim: 
+"   1. Don't wipe clipboard when exiting vim 
+"   2. Clear the terminal due to kitty terminal issues
 autocmd VimLeave * call system('echo ' . shellescape(getreg('+')) .
-            \ ' | xclip -selection clipboard')
+            \ ' | xclip -selection clipboard; cls')
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                          Formatting                        "
@@ -160,6 +167,13 @@ set cursorline
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                             Search                         "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" * and # search for the word under the cursor, but not match substrings
+" g* and g# do
+map * g*``
+map # g#``
+map <C-f> *
+
 " Case insensitive search by default
 set ignorecase
 set smartcase
@@ -202,11 +216,12 @@ execute pathogen#infect()
 "execute pathogen#helptags()
 
 " Gitgutter: 
+let g:gitgutter_highlight_lines=0
 set updatetime=100
 let g:gitgutter_diff_args = '-w'
 let g:gitgutter_override_sign_column_highlight = 0
 highlight clear SignColumn
-highlight GitGutterAdd ctermfg=2
+highlight GitGutterAdd ctermfg=2 
 highlight GitGutterChange ctermfg=3
 highlight GitGutterDelete ctermfg=1
 highlight GitGutterChangeDelete ctermfg=4
@@ -216,35 +231,324 @@ set tags=tags;/
 
 " Easymotion 
 map <Leader> <Plug>(easymotion-prefix)
+nmap <C-s> <Plug>(easymotion-s)
+
 
 " Incsearch
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
+
+" latex-unicoder
+" let g:unicoder_cancel_normal = 1
+" let g:unicoder_cancel_insert = 1
+" let g:unicoder_cancel_visual = 1
+" nnoremap <C-l> :call unicoder#start(0)<CR>
+" inoremap <C-l> <Esc>:call unicoder#start(1)<CR>
+" vnoremap <C-l> :<C-u>call unicoder#selection()<CR>
+
+let g:unicoder_no_map = 1
+map <C-l> <Plug>Unicoder
+
+
+" coc.vim
+" Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1):
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+" nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Run the Code Lens action on the current line.
+nmap <leader>cl  <Plug>(coc-codelens-action)
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+" if has('nvim-0.4.0') || has('patch-8.2.0750')
+"   nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+"   nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+"   inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+"   inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+"   vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+"   vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+" endif
+
+" Use CTRL-S for selections ranges.
+" Requires 'textDocument/selectionRange' support of language server.
+" nmap <silent> <C-s> <Plug>(coc-range-select)
+" xmap <silent> <C-s> <Plug>(coc-range-select)
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocActionAsync('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
+
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Mappings for CoCList
+" Show all diagnostics.
+" nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" " Manage extensions.
+" nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" " Show commands.
+" nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" " Find symbol of current document.
+" nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" " Search workspace symbols.
+" nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" " Do default action for next item.
+" nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" " Do default action for previous item.
+" nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" " Resume latest coc list.
+" nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+" Adopted from https://github.com/wookayin/dotfiles/commit/c64b4f34c1f8051d4e0feb15eb3d4e57d7eab475
+" Experimental feature (preview definition): gp, `<leader>K`, or <Shift-F12>:
+" Peek into the definition in a floating window.
+" TODO: If there are 2+ definitions, it does not work with floating windows (coc.nvim problem)
+command! -nargs=0 PreviewDefinition :call CocActionAsync('jumpDefinition', ':OpenAsPreview')
+command! -nargs=* OpenAsPreview :call s:open_as_preview("<args>")
+function! s:open_as_preview(callstr)
+  " e.g. the string should look like: +call cursor(<line>,<col>) <filename>
+  let m = matchlist(a:callstr, '^+call cursor(\(\d\+\),\s*\(\d\+\))\s\+\(.*\)')
+  if len(m) < 4   " TODO: more robust error handling
+    echohl WarningMsg | echom "ERROR: Invalid callstr format" | echohl None
+    return
+  endif
+  let linenr = m[1]
+  let filename = expand(m[3])
+  call quickui#preview#open(filename, {
+        \ 'cursor': linenr,
+        \ 'number' : 1,
+        \ 'persist': 0,
+        \ })
+endfunction
+" <F24> = <Shift-F12>
+nmap <F24>         :<C-U>PreviewDefinition<CR>
+nmap <leader>K     :<C-U>PreviewDefinition<CR>
+nmap <silent> gp   :<C-U>PreviewDefinition<CR>
+
+
+" Writing plugins
+" Color name (:help cterm-colors) or ANSI code
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
+
+" Color name (:help gui-colors) or RGB color
+let g:limelight_conceal_guifg = 'DarkGray'
+let g:limelight_conceal_guifg = '#777777'
+
+" Default: 0.5
+let g:limelight_default_coefficient = 0.7
+
+" Number of preceding/following paragraphs to include (default: 0)
+" let g:limelight_paragraph_span = 1
+let g:limelight_paragraph_span = 0
+
+" Beginning/end of paragraph
+"   When there's no empty line between the paragraphs
+"   and each paragraph starts with indentation
+" let g:limelight_bop = '^\s'
+" let g:limelight_eop = '\ze\n^\s'
+let g:limelight_bop = '^.*$'
+let g:limelight_eop = '\n'
+
+" Highlighting priority (default: 10)
+"   Set it to -1 not to overrule hlsearch
+let g:limelight_priority = -1
+
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+
+
+"
+" vimtex
+" 
+let g:vimtex_view_method = 'zathura'
+let maplocalleader = ","
+
+" Setup Zathura inverse search according to https://ejmastnak.github.io/tutorials/vim-latex/pdf-reader.html 
+" This will only work if `vim --version` includes `+clientserver`!
+if empty(v:servername) && exists('*remote_startserver')
+  call remote_startserver('VIM')
+endif
+
+
+"   " This is necessary for VimTeX to load properly. The "indent" is optional.
+"   " Note that most plugin managers will do this automatically.
+"   filetype plugin indent on
+"   
+"   " This enables Vim's and neovim's syntax-related features. Without this, some
+"   " VimTeX features will not work (see ":help vimtex-requirements" for more
+"   " info).
+"   " syntax enable
+"   
+"   " Viewer options: One may configure the viewer either by specifying a built-in
+"   " viewer method:
+"   let g:vimtex_view_method = 'zathura'
+"   
+"   " Or with a generic interface:
+"   " let g:vimtex_view_general_viewer = 'okular'
+"   " let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+"   
+"   " VimTeX uses latexmk as the default compiler backend. If you use it, which is
+"   " strongly recommended, you probably don't need to configure anything. If you
+"   " want another compiler backend, you can change it as follows. The list of
+"   " supported backends and further explanation is provided in the documentation,
+"   " see ":help vimtex-compiler".
+"   " let g:vimtex_compiler_method = 'latexrun'
+"   " let g:vimtex_compiler_method = './latexmk.sh'
+"   
+"   " Most VimTeX mappings rely on localleader and this can be changed with the
+"   " following line. The default is usually fine and is the symbol "\".
+"   let maplocalleader = ","
+"   
+"   " Taken from https://castel.dev/post/lecture-notes-1/
+"   let g:tex_flavor='latex'
+"   let g:vimtex_view_method='zathura'
+"   let g:vimtex_quickfix_mode=0
+"   " set conceallevel=1
+"   " let g:tex_conceal='abdmg'
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                      Language specific 		             "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Python specific
-let g:syntastic_python_checkers=['flake8']
-autocmd FileType python map <buffer> <c-f> :call Flake8()<CR>
-let g:flake8_show_in_file=1
-let g:flake8_show_quickfix=0
-let g:flake8_show_in_gutter=0
-" 
-" " Disable line size checking
-" autocmd BufWritePost *.py call Flake8()
-
-" let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"       
 
 " Ctags setup
 let g:clang_library_path='/usr/lib/llvm-3.8/lib/'
 " Auto generate tags file on file write of *.c and *.h files
 autocmd BufWritePost *.c,*.h silent! !ctags . &
 
-let g:jedi#popup_on_dot = 0
+" let g:jedi#popup_on_dot = 0
+
+" au FileType py set ia IPD <CR>import ipdb; ipdb.set_trace()
+" au FileType py ia IPD <CR>import ipdb; ipdb.set_trace()
+ia IPD import ipdb; ipdb.set_trace()
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                      File specific 		                 "
+"                      File specific                         "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 au FileType tex set spell
+
+" On pressing tab, insert 2 spaces
+au FileType tex set expandtab
+" show existing tab with 2 spaces width
+au FileType tex set tabstop=2
+au FileType tex set softtabstop=2
+" when indenting with '>', use 2 spaces width
+au FileType tex set shiftwidth=2
+
+" Latex indenting 
+au FileType tex set foldmethod=indent
+au FileType tex set wrap linebreak
+au FileType tex set smartindent
+au FileType tex set breakindent
+au FileType tex set display+=lastline
+
+" Do not wrap at 120 characters
+au FileType tex set tw=0
+
+" Allow bash aliases
+set shellcmdflag=-ic
