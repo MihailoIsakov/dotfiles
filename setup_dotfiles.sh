@@ -13,5 +13,10 @@ ln -s -f $(pwd)/dotfiles/.flake8            ~/
 ln -s -f $(pwd)/dotfiles/kitty.conf         ~/.config/kitty/
 ln -s -f $(pwd)/dotfiles/current-theme.conf ~/.config/kitty/
 
+mkdir -p ~/.vim/ftplugin
+ln -s -f $(pwd)/dotfiles/tex.vim            ~/.vim/ftplugin/
+
 mkdir -p ~/.config/i3/
 ln -s -f $(pwd)/dotfiles/i3_config          ~/.config/i3/config
+
+ln -s -f $(pwd)/dotfiles/polybar/           ~/.config/polybar/
