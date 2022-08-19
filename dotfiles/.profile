@@ -35,7 +35,7 @@ fi
 PATH=$PATH:/usr/local/bin/
 
 # setup screens
-/home/mihailo/.screenlayout/lab.sh
+# /home/mihailo/.screenlayout/lab.sh
 
 # faster keyboard
 xset r rate 180 60
@@ -49,20 +49,12 @@ export PATH="$PATH:/home/mihailo/.local/bin"
 
 # Virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Devel
-source /home/mihailo/.local/bin/virtualenvwrapper.sh
+# export PROJECT_HOME=$HOME/Devel source /home/mihailo/.local/bin/virtualenvwrapper.sh
 
 # Sensible terminal
 export TERM=/home/mihailo/.local/kitty.app/bin/kitty
 export TERMINAL=/home/mihailo/.local/kitty.app/bin/kitty
 
-# RISC-V 
-export PATH=$PATH:/opt/riscv_ima/bin
-
 # Background
 xsetroot -solid "#111111"
-
-# Should be in .xinitrc, but Wayland does not run it at startup?
-xmodmap -e "clear lock"
-xmodmap -e "keysym Caps_Lock = Escape" 
 
