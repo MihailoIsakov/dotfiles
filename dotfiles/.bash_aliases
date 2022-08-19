@@ -49,7 +49,8 @@ alias push='git push'
 
 # language specific tools
 alias ipy='ipython'
-alias activate='source venv/bin/activate'
+# Activate, assuming that ~/bin/source_venv exists
+alias activate='source source_venv'
 
 # experimental
 # alias ports='netstat -tulanp'

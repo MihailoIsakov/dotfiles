@@ -1,0 +1,6 @@
+#! /bin/bash
+
+for name in venv .venv 
+do
+    [ -d $name ] && source "$name/bin/activate"
+done
