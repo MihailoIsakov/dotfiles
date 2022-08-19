@@ -1,0 +1,1 @@
+/home/mihailo/libs/rofi-file-selector/rofi-file-selector.sh
