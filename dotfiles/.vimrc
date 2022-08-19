@@ -162,7 +162,7 @@ set expandtab
 set tw=120
 
 " Cursor settings
-" set cursorline
+set cursorline
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                             Search                         "

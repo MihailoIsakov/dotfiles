@@ -29,13 +29,12 @@ git clone https://github.com/easymotion/vim-easymotion ~/.vim/bundle/vim-easymot
 # install gitgutter
 git clone https://github.com/airblade/vim-gitgutter.git ~/.vim/bundle/vim-gitgutter
 
-# install YouCompleteMe
-sudo apt install build-essential cmake vim-nox python3-dev
-sudo apt install mono-complete golang nodejs default-jdk npm
-cd ~/.vim/bundle/
-git clone https://github.com/Valloric/YouCompleteMe.git
-cd YouCompleteMe
-git submodule update --init --recursive
-cd ~/.vim/bundle/YouCompleteMe
-python3 install.py --all
+# coc.nvim setup 
+curl -sL install-node.vercel.app/lts | bash
+cd ~/.vim/bundle
+git clone https://github.com/neoclide/coc.nvim
+
+# vimtex setup
+cd ~/.vim/bundle
+git clone https://github.com/lervag/vimtex
 
