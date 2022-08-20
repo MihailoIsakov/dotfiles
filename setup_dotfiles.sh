@@ -18,7 +18,9 @@ ln -s -f $(pwd)/dotfiles/.flake8            ~/
 
 # Not working since ~/bin/kitty is a symlink to ~/.local/kitty.app/bin/kitty
 # What's a good way to solve this? 
-ln -s $(pwd)/kitty/                         ~/.config/kitty
+ln -s    $(pwd)/dotfiles/kitty/             ~/.config/kitty
+
+ln -s -f $(pwd)/dotfiles/polybar/           ~/.config/polybar/
 
 mkdir -p ~/.vim/ftplugin
 ln -s -f $(pwd)/dotfiles/tex.vim            ~/.vim/ftplugin/
@@ -26,4 +28,6 @@ ln -s -f $(pwd)/dotfiles/tex.vim            ~/.vim/ftplugin/
 mkdir -p ~/.config/i3/
 ln -s -f $(pwd)/dotfiles/i3_config          ~/.config/i3/config
 
-ln -s -f $(pwd)/dotfiles/polybar/           ~/.config/polybar/
+mkdir -p ~/.config/zathura/
+ln -s -f $(pwd)/dotfiles/zathurarc          ~/.config/zathura/
+
