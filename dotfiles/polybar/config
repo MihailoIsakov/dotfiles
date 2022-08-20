@@ -94,7 +94,7 @@ type = internal/date
 interval = 1
 
 ; date = %H:%M
-date = %a %b %d, %k:%M
+date = %a %b %d, %k:%M:%S
 ; date-alt = %Y-%m-%d %H:%M:%S
 
 label = %date%
