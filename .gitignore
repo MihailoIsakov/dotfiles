@@ -1,1 +1,3 @@
 bin/brightness
+*.swo
+*.swp
