@@ -1,3 +1,8 @@
+#! /bin/sh
+
+# exit if any command fails
+set -e
+
 sudo apt update
 sudo apt install apt-transport-https ca-certificates curl software-properties-common
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
@@ -5,3 +10,11 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docke
 sudo apt update
 apt-cache policy docker-ce
 sudo apt install docker-ce
+
+# create group docker
+sudo groupadd docker 
+
+# add myself to the docker group
+sudo usermod -aG docker mihailo
+
+# log out 
