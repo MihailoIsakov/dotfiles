@@ -1,3 +1,5 @@
+#! /bin/sh
+
 chmod +x bin/*
 
 ln -s -f $(pwd)/bin/                        ~/
@@ -10,8 +12,10 @@ ln -s -f $(pwd)/dotfiles/.inputrc           ~/
 ln -s -f $(pwd)/dotfiles/.bash_git          ~/
 ln -s -f $(pwd)/dotfiles/.bash_aliases      ~/
 ln -s -f $(pwd)/dotfiles/.flake8            ~/
-ln -s -f $(pwd)/dotfiles/kitty.conf         ~/.config/kitty/
-ln -s -f $(pwd)/dotfiles/current-theme.conf ~/.config/kitty/
+
+# Not working since ~/bin/kitty is a symlink to ~/.local/kitty.app/bin/kitty
+# What's a good way to solve this? 
+ln -s $(pwd)/kitty/                         ~/.config/kitty
 
 mkdir -p ~/.vim/ftplugin
 ln -s -f $(pwd)/dotfiles/tex.vim            ~/.vim/ftplugin/
