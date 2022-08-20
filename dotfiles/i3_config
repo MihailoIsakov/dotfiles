@@ -13,7 +13,7 @@ set $mod Mod4
 exec --no-startup-id nm-applet
 
 # Polybar with i3-groups workspace names
-exec_always killall polybar; polybar main; polybar second
+exec_always /home/mihailo/bin/polybar.sh
 
 # remove caps lock
 # exec_always sleep 1; source /home/mihailo/.xinitrc; beep
