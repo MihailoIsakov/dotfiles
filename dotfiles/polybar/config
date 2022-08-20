@@ -26,7 +26,13 @@ alert = #A54242
 disabled = #707880
 
 include-file = /home/mihailo/.config/polybar/main
-include-file = /home/mihailo/.config/polybar/second
+
+
+[module/main_i3]
+type = custom/script
+exec = i3-groups-polybar -m eDP-1
+tail = true
+interval = 5
 
 
 [module/battery]
