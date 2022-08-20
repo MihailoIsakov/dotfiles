@@ -136,10 +136,10 @@ set keymap vi-command
 echo -ne '\e]12;orange\a'
 
 # Created by `pipx` on 2022-01-21 17:21:54
-#export PATH="$PATH:/home/mihailo/.local/bin"
+export PATH="$PATH:/home/mihailo/.local/bin"
 
+# Fuzzy search autocompletion and terminal key bindings
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
 
 # virtualenv
 export WORKON_HOME=$HOME/.virtualenvs
