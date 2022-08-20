@@ -16,6 +16,11 @@ mkdir -p ~/libs/
 ################################################
 sudo apt install vim-gtk python3-pip bash-completion mosh wget curl 
 
+git config --global user.email "isakov.m@gmail.com"
+git config --global user.name  "Mihailo Isakov"
+git config pull.rebase false  # merge strategy
+
+
 #######################################
 # desktop setup, don't run on servers # 
 #######################################
@@ -26,13 +31,18 @@ then
     sudo apt install i3 polybar rofi 
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
     sudo snap install jump 
-    # FZF
+
+    # i3gem 
+    cd ~/tools
+    git clone git@github.com:MihailoIsakov/i3-groups.git
+    cd i3-groups
+    git checkout 1a8b823
+    pipx install -e .
+
+    # Fuzzy search
     cd ~/tools
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     ~/.fzf/install
-
-    git config --global user.email "isakov.m@gmail.com"
-    git config --global user.name  "Mihailo Isakov"
 
     # apps
     sudo apt install arandr gnome-screenshot pm-utils pavucontrol zathura htop nmap 
