@@ -1,5 +1,8 @@
 #! /bin/sh
 
+# exit if any command fails
+set -e
+
 #
 # Install powerline-shell fonts
 #

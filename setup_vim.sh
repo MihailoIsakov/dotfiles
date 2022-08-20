@@ -1,5 +1,8 @@
 #! /bin/sh
 
+# exit if any command fails
+set -e
+
 # install the molokai theme
 mkdir -p ~/.vim/colors
 curl https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim --output ~/.vim/colors/molokai.vim

@@ -1,5 +1,8 @@
 #! /bin/sh
 
+# exit if any command fails
+set -e 
+
 ##################################
 # Setup the desktop as I like it #
 ##################################
