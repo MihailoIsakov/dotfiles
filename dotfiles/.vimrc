@@ -142,9 +142,9 @@ autocmd! bufwritepost .vimrc source %
 autocmd VimLeave * call system('echo ' . shellescape(getreg('+')) .
             \ ' | xclip -selection clipboard;')
 
-
-" Allow bash aliases
-" set shellcmdflag=-ic
+" Allow per-project .vimrc files 
+set exrc
+set secure 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                          Formatting                        "

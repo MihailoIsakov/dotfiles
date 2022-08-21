@@ -6,7 +6,7 @@ set selection-clipboard clipboard
 
 # trying to get inverse search to work
 # set synctex-editor-command "vim --servername +%{1} --remote-silent +%{line} %{input}"
-# set synctex-editor-command "beep"
+set synctex-editor-command "beep"
 # set synctex-editor-command "vim --servername +%{1} --remote-silent +%{line} %{input}"
 
 # hjkl -> jkl; 
@@ -68,7 +68,7 @@ set notification-fg "#151515" #00
 
 set recolor "true"
 set recolor-lightcolor "#2B2B2B" #00
-set recolor-darkcolor "FFFFFF" #06
+set recolor-darkcolor "#FFFFFF" #06
 set recolor-reverse-video "true"
 set recolor-keephue "true"
 
@@ -81,3 +81,8 @@ set scroll-step 50
 # map [fullscreen] f toggle_fullscreen
 
 set sandbox none
+
+# Adding reverse search between gvim and zathura
+set synctex true
+set synctex-editor-command "vim --remote-silent +%{line} %{input}"
+ 			
