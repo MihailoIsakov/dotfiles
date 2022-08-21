@@ -49,7 +49,7 @@ then
     sudo snap install libreoffice
 
     # libs, python3-tk is needed for Matplotlib
-    sudo apt install nodejs python3.10-venv python3-tk
+    sudo apt install npm nodejs python3.10-venv python3-tk
 
     # Use pipx or virtualenvwrapper whenever possible
     pip install virtualenv virtualenvwrapper pipx

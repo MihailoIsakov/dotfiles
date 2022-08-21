@@ -34,8 +34,10 @@ git clone https://github.com/easymotion/vim-easymotion ~/.vim/bundle/vim-easymot
 git clone https://github.com/airblade/vim-gitgutter.git ~/.vim/bundle/vim-gitgutter
 
 # coc.nvim setup 
-# curl -sL install-node.vercel.app/lts | bash
+curl -sL install-node.vercel.app/lts | sudo bash
 git clone https://github.com/neoclide/coc.nvim ~/.vim/bundle/coc.nvim
+cd ~/.vim/bundle/coc.nvim
+npm install
 
 # vimtex setup
 git clone https://github.com/lervag/vimtex ~/.vim/bundle/vimtex
