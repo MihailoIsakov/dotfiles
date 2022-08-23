@@ -17,22 +17,73 @@
 ;==========================================================
 
 [colors]
-background = #282A2E
+background     = #282A2E
 background-alt = #373B41
-foreground = #C5C8C6
-primary = #F0C674
-secondary = #8ABEB7
-alert = #A54242
-disabled = #707880
-
-include-file = /home/mihailo/.config/polybar/main
+foreground     = #C5C8C6
+primary        = #F0C674
+secondary      = #8ABEB7
+alert          = #A54242
+disabled       = #707880
 
 
-[module/main_i3]
+;==========================================================
+; A bar containing modules
+;==========================================================
+
+[bar/main]
+monitor = ${env:MONITOR:}
+
+modules-left = workspace_groups
+; modules-right = pulseaudio battery memory cpu date
+modules-right = pulseaudio cpu memory date
+
+width = 100%
+height = 24pt
+radius = 12pt
+
+; the last number is the vertical offset
+font-0 = Fira Code:size=14:weight=normal;4
+
+fixed-center = true
+; y-offset = 10
+override-redirect = false 
+
+; Add this to support applets
+tray-position = right
+wm-restack = i3
+
+; dpi = 96
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+border-size = 1pt
+border-color = #00000000
+padding-left = 1
+padding-right = 1
+
+module-margin = 1
+separator = |
+separator-foreground = ${colors.disabled}
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+enable-ipc = true
+
+
+;==========================================================
+; Modules
+;==========================================================
+
+
+[module/workspace_groups]
 type = custom/script
-exec = i3-groups-polybar -m eDP-1
+exec = i3-groups-polybar
 tail = true
-interval = 5
+; interval = 5
+scroll-up = next-ws-in-group
+scroll-down = next-ws-in-group -p
 
 
 [module/battery]
