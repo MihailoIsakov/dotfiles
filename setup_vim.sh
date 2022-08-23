@@ -33,6 +33,9 @@ git clone https://github.com/easymotion/vim-easymotion ~/.vim/bundle/vim-easymot
 # install gitgutter
 git clone https://github.com/airblade/vim-gitgutter.git ~/.vim/bundle/vim-gitgutter
 
+# install tabularize
+git clone https://github.com/godlygeek/tabular ~/.vim/bundle/tabular
+
 # coc.nvim setup 
 curl -sL install-node.vercel.app/lts | sudo bash
 git clone https://github.com/neoclide/coc.nvim ~/.vim/bundle/coc.nvim
