@@ -1,0 +1,15 @@
+{
+  "segments": [
+    "time",
+    "ssh",
+    "virtual_env",
+    "cwd",
+    "git",
+    "jobs",
+    "root",
+    "newline"
+  ],
+  "cws": {
+      "full_cwd": true
+  }
+}
