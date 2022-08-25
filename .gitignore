@@ -1,3 +1,4 @@
 bin/brightness
+bin/powerline-go
 *.swo
 *.swp

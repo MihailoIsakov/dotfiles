@@ -53,7 +53,10 @@ then
 
     # Use pipx or virtualenvwrapper whenever possible
     pip install virtualenv virtualenvwrapper pipx
-    pipx install tldr powerline-shell
+
+    # pipx install tldr powerline-shell
+    # TODO: automate downloading a powerline-go release?
+
     # TODO: flake8 in pip? 
 
     # fonts
