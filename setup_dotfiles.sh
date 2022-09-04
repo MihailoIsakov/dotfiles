@@ -23,8 +23,7 @@ ln -s    $(pwd)/dotfiles/kitty/             ~/.config/kitty
 # FIXME: do we need the / at the end? 
 ln -s -f $(pwd)/dotfiles/polybar/           ~/.config/polybar/
 
-mkdir -p ~/.vim/ftplugin
-ln -s -f $(pwd)/dotfiles/tex.vim            ~/.vim/ftplugin/
+ln -s -f $(pwd)/dotfiles/ftplugin/          ~/.vim/ftplugin
 
 mkdir -p ~/.config/i3/
 ln -s -f $(pwd)/dotfiles/i3_config          ~/.config/i3/config
