@@ -32,6 +32,11 @@ then
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
     sudo snap install jump 
 
+    # virtualbox
+    sudo apt install virtualbox
+    # download the DPKG https://www.virtualbox.org/wiki/Linux_Downloads
+
+
     # i3gem 
     cd ~/tools
     git clone git@github.com:MihailoIsakov/i3-groups.git
@@ -45,11 +50,11 @@ then
     ~/.fzf/install
 
     # apps
-    sudo apt install arandr gnome-screenshot pm-utils pavucontrol zathura htop nmap 
-    sudo snap install libreoffice
+    sudo apt install arandr gnome-screenshot pm-utils pavucontrol zathura htop nmap gthumb
+    sudo snap install libreoffice xdotool
 
     # libs, python3-tk is needed for Matplotlib
-    sudo apt install npm nodejs python3.10-venv python3-tk
+    sudo apt install npm nodejs python3.10-venv python3-tk libncurses5
 
     # Use pipx or virtualenvwrapper whenever possible
     pip install virtualenv virtualenvwrapper pipx
