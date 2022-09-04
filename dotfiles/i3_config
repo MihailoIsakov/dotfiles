@@ -115,7 +115,7 @@ bindsym $mod+Ctrl+l         resize shrink height 5 px or 5 ppt
 # split in horizontal orientation
 bindsym $mod+h split h
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+Shift+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -223,6 +223,7 @@ bindsym $mod+g       exec change-active-group
 bindsym $mod+Shift+g exec move-ws-to-group
 bindsym $mod+Shift+w exec make-workspace
 bindsym $mod+Shift+f exec ~/libs/rofi-file-selector/rofi-file-selector.sh
+bindsym $mod+v       exec rofi-virtualbox.sh
 #bindsym $mod+a       exec goto-shared-ws --key browser
 #bindsym $mod+s       exec goto-shared-ws --key roam
 
