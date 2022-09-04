@@ -1,4 +1,5 @@
 bin/brightness
 bin/powerline-go
+bin/inkscape
 *.swo
 *.swp
