@@ -36,6 +36,9 @@ exec_always --no-startup-id i3-battery-popup.sh -L 30 -m "Battery!" -s /usr/shar
 # not sure what this is -------------------------------------
 # exec --no-startup-id xset dpms 600
 
+# Owncloud appimage
+#exec --no-startup-id ~/tools/owncloud/ownCloud-2.11.0.8354.AppImage
+
 
 ####################################################################################################
 # Run custom commands or applications on key combinations                                                                              #
