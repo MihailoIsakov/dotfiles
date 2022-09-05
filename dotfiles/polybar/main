@@ -1,7 +1,7 @@
 [bar/main]
 modules-left = main_i3
 ; modules-right = pulseaudio battery memory cpu date
-modules-right = pulseaudio date
+modules-right = pulseaudio battery date
 
 monitor = ${env:MONITOR:}
 
