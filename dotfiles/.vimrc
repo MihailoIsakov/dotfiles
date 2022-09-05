@@ -173,6 +173,8 @@ set cursorline
 map * g*``
 map # g#``
 map <C-f> *
+map <C-c> :nohlsearch<CR>
+" nnoremap <esc> <esc>:noh<CR>
 
 " Case insensitive search by default
 set ignorecase
@@ -181,31 +183,31 @@ set smartcase
 " Higlight search matches
 set hlsearch
 " Turn off search highlight
-nnoremap <leader><space> :nohlsearch<CR>
+" nnoremap <leader><space> :nohlsearch<CR>
 
 
 " Highlight all instances of word under cursor, when idle.
 " Useful when studying strange source code.
 " Type z/ to toggle highlighting on/off.
-nnoremap z\ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
-function! AutoHighlightToggle()
-   let @/ = ''
-   if exists('#auto_highlight')
-     au! auto_highlight
-     augroup! auto_highlight
-     setl updatetime=4000
-     echo 'Highlight current word: off'
-     return 0
-  else
-    augroup auto_highlight
-    au!
-    au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
-    augroup end
-    setl updatetime=500
-    echo 'Highlight current word: ON'
-  return 1
- endif
-endfunction
+" nnoremap z\ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
+" function! AutoHighlightToggle()
+"    let @/ = ''
+"    if exists('#auto_highlight')
+"      au! auto_highlight
+"      augroup! auto_highlight
+"      setl updatetime=4000
+"      echo 'Highlight current word: off'
+"      return 0
+"   else
+"     augroup auto_highlight
+"     au!
+"     au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+"     augroup end
+"     setl updatetime=500
+"     echo 'Highlight current word: ON'
+"   return 1
+"  endif
+" endfunction
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -225,6 +227,11 @@ highlight GitGutterAdd ctermfg=2
 highlight GitGutterChange ctermfg=3
 highlight GitGutterDelete ctermfg=1
 highlight GitGutterChangeDelete ctermfg=4
+
+" Vim airline word count
+let g:airline#extensions#wordcount#enabled = 1
+" Add notes to filetypes
+let g:airline#extensions#wordcount#filetypes = '\vnotes|help|markdown|rst|org|text|asciidoc|tex|mail'
 
 " recursively search up for tags file
 set tags=tags;/
@@ -418,51 +425,4 @@ if !empty(glob("~/.vim/bundle/coc.nvim/"))
     nmap <silent> gp   :<C-U>PreviewDefinition<CR>
 endif
 
-
-" Writing plugins
-" Color name (:help cterm-colors) or ANSI code
-let g:limelight_conceal_ctermfg = 'gray'
-let g:limelight_conceal_ctermfg = 240
-
-" Color name (:help gui-colors) or RGB color
-let g:limelight_conceal_guifg = 'DarkGray'
-let g:limelight_conceal_guifg = '#777777'
-
-" Default: 0.5
-let g:limelight_default_coefficient = 0.7
-
-" Number of preceding/following paragraphs to include (default: 0)
-" let g:limelight_paragraph_span = 1
-let g:limelight_paragraph_span = 0
-
-" Beginning/end of paragraph
-"   When there's no empty line between the paragraphs
-"   and each paragraph starts with indentation
-" let g:limelight_bop = '^\s'
-" let g:limelight_eop = '\ze\n^\s'
-let g:limelight_bop = '^.*$'
-let g:limelight_eop = '\n'
-
-" Highlighting priority (default: 10)
-"   Set it to -1 not to overrule hlsearch
-let g:limelight_priority = -1
-
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                      Language specific 		             "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Ctags setup
-let g:clang_library_path='/usr/lib/llvm-3.8/lib/'
-" Auto generate tags file on file write of *.c and *.h files
-autocmd BufWritePost *.c,*.h silent! !ctags . &
-
-" let g:jedi#popup_on_dot = 0
-
-" au FileType py set ia IPD <CR>import ipdb; ipdb.set_trace()
-" au FileType py ia IPD <CR>import ipdb; ipdb.set_trace()
-ia IPD import ipdb; ipdb.set_trace()
 

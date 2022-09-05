@@ -11,20 +11,13 @@ alias cls='printf "\033c"'
 alias cl='printf "\033c"'
 
 # ls stuff
-alias ls='ls --group-directories-first --color'
-alias l='ls'
-alias ll='ls -l'
-alias la='ls -a'
 alias sl='ls'
-alias lt='ll -t'
+alias ls='ls --group-directories-first --color'
+alias ll='ls -latrh'
 alias ld='ls -la | grep "^d" && ls -la | grep "^-" && ls -la | grep "^l"'
-alias ltr='ll -tr'
 
 # Clone terminal
 alias cl='clone_term.sh'
-
-# nemo fucks up i3 with its desktop
-alias nemo='nemo --no-desktop'
 
 alias chrome='google-chrome'
 alias open='xdg-open'
@@ -51,9 +44,6 @@ alias push='git push'
 alias ipy='ipython'
 # Activate, assuming that ~/bin/source_venv exists
 alias activate='source source_venv'
-
-# experimental
-# alias ports='netstat -tulanp'
 
 # enable aliases in non-interactive shells like vim
 shopt -s expand_aliases

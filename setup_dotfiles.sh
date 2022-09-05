@@ -20,14 +20,18 @@ ln -s -f $(pwd)/dotfiles/.flake8            ~/
 # What's a good way to solve this? 
 ln -s    $(pwd)/dotfiles/kitty/             ~/.config/kitty
 
+# FIXME: do we need the / at the end? 
 ln -s -f $(pwd)/dotfiles/polybar/           ~/.config/polybar/
 
-mkdir -p ~/.vim/ftplugin
-ln -s -f $(pwd)/dotfiles/tex.vim            ~/.vim/ftplugin/
+ln -s -f $(pwd)/dotfiles/ftplugin/          ~/.vim/ftplugin
 
 mkdir -p ~/.config/i3/
 ln -s -f $(pwd)/dotfiles/i3_config          ~/.config/i3/config
 
 mkdir -p ~/.config/zathura/
 ln -s -f $(pwd)/dotfiles/zathurarc          ~/.config/zathura/
+
+mkdir -p ~/.config/powerline-shell/
+ln -s -f $(pwd)/dotfiles/powerline-shell/config.json ~/.config/powerline-shell/config.json
+
 

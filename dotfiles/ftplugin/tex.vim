@@ -16,6 +16,7 @@ set breakindent
 set display+=lastline
 
 " Do not wrap at 120 characters
+set tw=120
 set tw=0
 
 " vimtex is slow, this may help?
@@ -91,7 +92,7 @@ augroup END
 "   let g:tex_flavor='latex'
 "   let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
-set conceallevel=1
+set conceallevel=0
 let g:tex_conceal='abdmg'
 
 " conceal background color
