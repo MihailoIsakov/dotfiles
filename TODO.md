@@ -7,3 +7,5 @@
     - [ ] Remove Desktop/, Downloads/, etc. 
     - [ ] Create my dirs 
 - [x] kitty dir
+- [ ] Move /etc/tlp.conf into here
+- [ ] try https://github.com/AdnanHodzic/auto-cpufreq
