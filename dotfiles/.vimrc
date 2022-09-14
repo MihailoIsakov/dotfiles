@@ -145,6 +145,11 @@ autocmd VimLeave * call system('echo ' . shellescape(getreg('+')) .
 set exrc
 set secure 
 
+" Undo folder
+set undofile
+set undodir=~/.vim/undodir
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                          Formatting                        "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
