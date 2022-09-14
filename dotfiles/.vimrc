@@ -28,6 +28,8 @@ set hidden
 colorscheme molokai
 let g:rehash256 = 1
 set background=dark
+highlight Normal ctermbg=NONE
+highlight nonText ctermbg=NONE
 " Airline theme to match
 let g:airline_theme = "molokai"
 
@@ -78,9 +80,6 @@ hi Folded ctermbg=235
 
 " Autocomplete background color
 hi CocMenuSel ctermbg=yellow ctermfg=black
-
-highlight Normal ctermbg=NONE
-highlight nonText ctermbg=NONE
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                         Keybindings                        "
@@ -145,6 +144,11 @@ autocmd VimLeave * call system('echo ' . shellescape(getreg('+')) .
 " Allow per-project .vimrc files 
 set exrc
 set secure 
+
+" Undo folder
+set undofile
+set undodir=~/.vim/undodir
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                          Formatting                        "
@@ -216,6 +220,10 @@ set hlsearch
 " Pathogen runtimepath management
 execute pathogen#infect()
 "execute pathogen#helptags()
+
+" NERDTree
+nnoremap <C-t> :NERDTreeToggle<CR>
+
 
 " Gitgutter: 
 let g:gitgutter_highlight_lines=0
