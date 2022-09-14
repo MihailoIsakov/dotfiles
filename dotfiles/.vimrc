@@ -221,6 +221,10 @@ set hlsearch
 execute pathogen#infect()
 "execute pathogen#helptags()
 
+" NERDTree
+nnoremap <C-t> :NERDTreeToggle<CR>
+
+
 " Gitgutter: 
 let g:gitgutter_highlight_lines=0
 set updatetime=100
