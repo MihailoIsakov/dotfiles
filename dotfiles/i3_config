@@ -25,7 +25,7 @@ exec_always sleep 1; xmodmap -e "keysym Caps_Lock = Escape"; xmodmap -e "clear l
 exec_always --no-startup-id rename-workspace -n "shared:1"
 
 # battery notification
-exec_always --no-startup-id i3-battery-popup.sh -L 30 -m "Battery!" -s /usr/share/sounds/freedesktop/stereo/power-unplug.oga -v 70 -n
+exec_always --no-startup-id killall i3-battery-popup.sh; i3-battery-popup.sh -L 30 -m "Battery!" -s /usr/share/sounds/freedesktop/stereo/power-unplug.oga -v 70 -n
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the screen before suspend. Use loginctl lock-session to lock your screen.
 # exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
