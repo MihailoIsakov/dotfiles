@@ -14,7 +14,11 @@ mkdir -p ~/libs/
 ################################################
 # bare necessities, possibly tied into configs #
 ################################################
-sudo apt install vim-gtk python3-pip bash-completion mosh wget curl 
+sudo apt install vim-gtk python3-pip bash-completion mosh wget curl htop 
+
+# Fuzzy search
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
 
 git config --global user.email "isakov.m@gmail.com"
 git config --global user.name  "Mihailo Isakov"
@@ -32,10 +36,14 @@ then
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
     sudo snap install jump 
 
+    # laptop-specific: power and stuff
+    sudo apt install powertop tlp smartmontools
+    systemctl enable tlp.service
+    systemctl mask power-profiles-daemon.service  # https://linrunner.de/tlp/faq/installation.html
+
     # virtualbox
     sudo apt install virtualbox
     # download the DPKG https://www.virtualbox.org/wiki/Linux_Downloads
-
 
     # i3gem 
     cd ~/tools
@@ -44,13 +52,8 @@ then
     git checkout 1a8b823
     pipx install -e .
 
-    # Fuzzy search
-    cd ~/tools
-    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    ~/.fzf/install
-
     # apps
-    sudo apt install arandr gnome-screenshot pm-utils pavucontrol zathura htop nmap gthumb
+    sudo apt install arandr gnome-screenshot pm-utils pavucontrol zathura nmap gthumb
     sudo snap install libreoffice xdotool
 
     # libs, python3-tk is needed for Matplotlib
