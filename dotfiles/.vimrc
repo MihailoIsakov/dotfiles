@@ -28,6 +28,8 @@ set hidden
 colorscheme molokai
 let g:rehash256 = 1
 set background=dark
+highlight Normal ctermbg=NONE
+highlight nonText ctermbg=NONE
 " Airline theme to match
 let g:airline_theme = "molokai"
 
@@ -78,9 +80,6 @@ hi Folded ctermbg=235
 
 " Autocomplete background color
 hi CocMenuSel ctermbg=yellow ctermfg=black
-
-highlight Normal ctermbg=NONE
-highlight nonText ctermbg=NONE
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                         Keybindings                        "
