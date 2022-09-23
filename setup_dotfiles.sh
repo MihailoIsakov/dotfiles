@@ -24,7 +24,7 @@ ln -s    $(pwd)/dotfiles/kitty/             ~/.config/kitty
 ln -s -f $(pwd)/dotfiles/polybar/           ~/.config/polybar/
 
 ln -s -f $(pwd)/dotfiles/ftplugin/          ~/.vim/ftplugin
-ln -s -f $(pwd)/dotfiles/UltiSnips/         ~/.vim/UltiSnips/
+ln -s -f $(pwd)/dotfiles/UltiSnips/         ~/.vim/UltiSnips
 
 mkdir -p ~/.config/i3/
 ln -s -f $(pwd)/dotfiles/i3_config          ~/.config/i3/config
