@@ -49,3 +49,5 @@ git clone https://github.com/lervag/vimtex ~/.vim/bundle/vimtex
 git clone https://github.com/junegunn/goyo.vim       ~/.vim/bundle/goyo.vim
 git clone https://github.com/junegunn/limelight.vim  ~/.vim/bundle/limelight.vim
 
+# ultisnips
+git clone https://github.com/SirVer/ultisnips ~/.vim/bundle/ultisnips
