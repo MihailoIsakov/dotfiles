@@ -53,7 +53,7 @@ set notification-error-fg "#151515" #00
 set notification-warning-bg "#AC4142" #08
 set notification-warning-fg "#151515" #00
 
-set highlight-transparency 0.15
+set highlight-transparency 0.5
 set highlight-color "#F4BF75" #0A
 set highlight-active-color "#6A9FB5" #0D
 
