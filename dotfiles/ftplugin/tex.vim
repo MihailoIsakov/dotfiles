@@ -103,6 +103,7 @@ let g:tex_conceal='abdmg'
 "
 " Goyo + Limelight
 "
+map <C-g> :Goyo<CR>
 highlight Normal ctermbg = 235 
 highlight nonText ctermbg = 235
 autocmd! User GoyoEnter Limelight
@@ -145,4 +146,5 @@ let g:limelight_default_coefficient = 0.8
 
 " let g:unicoder_no_map = 1
 " map <C-l> <Plug>Unicoder
+
 
