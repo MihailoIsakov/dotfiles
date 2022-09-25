@@ -133,6 +133,13 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+e layout toggle
 
 
+for_window [window_role="pop-up"]                       floating enable
+for_window [window_role="bubble"]                       floating enable 
+for_window [window_role="task_dialog"]                  floating enable
+for_window [window_role="Preferences"]                  floating enable
+for_window [window_type="dialog"]                       floating enable 
+for_window [window_type="menu"]                         floating enable
+
 ####################################################################################################
 # Floating settings                                                                                #
 ####################################################################################################
@@ -140,7 +147,7 @@ bindsym $mod+e layout toggle
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+f floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 # Make the currently focused window a scratchpad
@@ -229,7 +236,7 @@ bindsym $mod+Shift+r exec move-container-to-ws
 bindsym $mod+g       exec change-active-group
 bindsym $mod+Shift+g exec move-ws-to-group
 bindsym $mod+Shift+w exec make-workspace
-bindsym $mod+Shift+f exec ~/libs/rofi-file-selector/rofi-file-selector.sh
+#bindsym $mod+Shift+f exec ~/libs/rofi-file-selector/rofi-file-selector.sh
 bindsym $mod+v       exec rofi-virtualbox.sh
 #bindsym $mod+a       exec goto-shared-ws --key browser
 #bindsym $mod+s       exec goto-shared-ws --key roam
