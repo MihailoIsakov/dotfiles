@@ -107,7 +107,10 @@ let g:tex_conceal='abdmg'
 "
 " Goyo + Limelight
 "
+map <C-g> :Goyo<CR>
+
 let g:goyo_width=85
+
 highlight Normal ctermbg = 235 
 highlight nonText ctermbg = 235
 autocmd! User GoyoEnter Limelight
@@ -118,15 +121,12 @@ let g:limelight_default_coefficient = 0.8
 " Number of preceding/following paragraphs to include (default: 0)
 let g:limelight_paragraph_span = 0
 
-" Beginning/end of paragraph
-"   When there's no empty line between the paragraphs
-"   and each paragraph starts with indentation
-"let g:limelight_bop = '^%*\s'
-"let g:limelight_eop = '\ze\n^\s'
-
 " Start at whitespace line or at a % symbol
+"let g:limelight_bop = '^%*\s'
 let g:limelight_bop = '^\s*%*\s*$\n\zs'
+
 " Stop at a % symbol
+"let g:limelight_eop = '\ze\n^\s'
 let g:limelight_eop = '^\s*%*\s*$' 
 
 
@@ -148,4 +148,5 @@ let g:limelight_eop = '^\s*%*\s*$'
 
 " let g:unicoder_no_map = 1
 " map <C-l> <Plug>Unicoder
+
 

@@ -6,6 +6,8 @@
 - [ ] Desktop organization
     - [ ] Remove Desktop/, Downloads/, etc. 
     - [ ] Create my dirs 
-- [x] kitty dir
 - [ ] Add vim spell file
 - [ ] Replace curl with wget
+
+# Done: 
+- [x] kitty dir
