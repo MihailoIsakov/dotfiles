@@ -16,6 +16,9 @@ mkdir -p ~/.vim/pack/tpope/start
 cd ~/.vim/pack/tpope/start
 git clone https://tpope.io/vim/fugitive.git
 vim -u NONE -c "helptags fugitive/doc" -c q
+# install sleuth
+git clone https://tpope.io/vim/sleuth.git
+vim -u NONE -c "helptags sleuth/doc" -c q
 
 # install airline
 git clone https://github.com/vim-airline/vim-airline ~/.vim/bundle/vim-airline
