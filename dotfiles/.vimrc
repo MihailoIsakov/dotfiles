@@ -5,9 +5,9 @@
 " Start unwrapped                                                                                                       
 set nowrap                                                                                                                                  
 " Don't break lines                                                                                                     
-set textwidth=0                                                                                                         
-set wrapmargin=0  
-set nofixendofline
+"set textwidth=0                                                                                                         
+"set wrapmargin=0  
+"set nofixendofline
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                      Visuals / Theme                       "
@@ -157,13 +157,13 @@ set undodir=~/.vim/undodir
 filetype plugin indent on
 
 " Tab settings
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+"set tabstop=4
+"set shiftwidth=4
+"set softtabstop=4
 set expandtab
 
 " Text width
-set tw=120
+"set tw=120
 
 " Cursor settings
 set cursorline
