@@ -21,7 +21,7 @@ set display+=lastline
 set tw=80
 
 " Auto format paragraphs according to https://vim.fandom.com/wiki/Automatic_formatting_of_paragraphs
-setl fo=aw2tq
+"setl fo=aw2tq
 
 
 " vimtex is slow, this may help?
@@ -110,6 +110,7 @@ let g:tex_conceal='abdmg'
 map <C-g> :Goyo<CR>
 
 let g:goyo_width=85
+let g:goyo_height=1000
 
 highlight Normal ctermbg = 235 
 highlight nonText ctermbg = 235

@@ -39,6 +39,9 @@ git clone https://github.com/airblade/vim-gitgutter.git ~/.vim/bundle/vim-gitgut
 # install tabularize
 git clone https://github.com/godlygeek/tabular ~/.vim/bundle/tabular
 
+# install vim-textobj-sentence
+git clone https://github.com/preservim/vim-textobj-sentence ~/.vim/bundle/vim-textobj-sentence
+
 # coc.nvim setup 
 curl -sL install-node.vercel.app/lts | sudo bash
 git clone https://github.com/neoclide/coc.nvim ~/.vim/bundle/coc.nvim
