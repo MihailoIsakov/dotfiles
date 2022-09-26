@@ -252,7 +252,7 @@ font pango:monospace 11
 #font pango:DejaVu Sans Mono 8
 
 # window border
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border pixel 2 2 2 2
 
 # class			        border  backgr. text    indicator
 client.focused          #333333 #F0C674 #000000 #F0C674
