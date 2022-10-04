@@ -12,7 +12,7 @@ alias cl='printf "\033c"'
 
 # ls stuff
 alias sl='ls'
-alias ls='ls --group-directories-first --color'
+alias ls='ls -t --group-directories-first --color'
 alias ll='ls -latrh'
 alias ld='ls -la | grep "^d" && ls -la | grep "^-" && ls -la | grep "^l"'
 
@@ -53,3 +53,14 @@ alias cb='kitty +kitten clipboard'
 
 # kitty ssh
 alias s="kitty +kitten ssh"
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# gtkwave
+alias gtkwave="gtkwave --rcvar 'fontname_signals Firacode 16' --rcvar 'fontname_waves Firacode 16'"
+
+# zathura
+alias zs="swallow zathura"  
+
