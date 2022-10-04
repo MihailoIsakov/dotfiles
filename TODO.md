@@ -1,4 +1,14 @@
 # To-do list: 
+
+## Keyboard:
+- [ ] Build wireless keyboard 
+- [ ] Switch to Colemak
+
+## I3:
+- [ ] Fix i3-groups script 
+- [ ] Fix clone_term.sh script
+
+## System:
 - [ ] Centralized way to manage $PATH?
 - [ ] Transition to GNU stow
 - [ ] Move .config/user-dirs.dirs into dotfiles
@@ -6,8 +16,11 @@
 - [ ] Desktop organization
     - [ ] Remove Desktop/, Downloads/, etc. 
     - [ ] Create my dirs 
-- [ ] Add vim spell file
 - [ ] Replace curl with wget
 
-# Done: 
-- [x] kitty dir
+## Graphics:
+- [ ] Use a compositor to dim inactive windows
+
+## Editor:
+- [ ] Add vim spell file to dotfiles
+
