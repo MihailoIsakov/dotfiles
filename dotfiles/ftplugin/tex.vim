@@ -97,7 +97,7 @@ set conceallevel=0
 let g:tex_conceal='abdmg'
 
 " conceal background color
-"hi Conceal ctermfg=NONE guifg=NONE ctermbg=NONE guibg=NONE
+hi Conceal ctermfg=NONE guifg=NONE ctermbg=NONE guibg=NONE
 
 
 "
