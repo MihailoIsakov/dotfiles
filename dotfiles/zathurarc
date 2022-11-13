@@ -26,6 +26,9 @@ set adjust-open "best-fit"
 # One page per row by default
 set pages-per-row 1
 
+# In the dual-page mode, have first page on the left
+set first-page-column 1
+
 #stop at page boundries
 set scroll-page-aware "true"
 set smooth-scroll "true"
