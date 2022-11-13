@@ -21,6 +21,8 @@ exec_always --no-startup-id xmodmap .Xmodmap
 exec_always sleep 1; xmodmap -e "keysym Caps_Lock = Escape"; xmodmap -e "clear lock"
 # exec_always bash ~/.xinputrc
 
+exec_always --no-startup-id framework_fix_touchpad.sh
+
 # rename initial workspace to shared:1 so i3-groups doesn't get confused at startup
 exec_always --no-startup-id rename-workspace -n "shared:1"
 
