@@ -45,6 +45,9 @@ then
     sudo apt install virtualbox
     # download the DPKG https://www.virtualbox.org/wiki/Linux_Downloads
 
+    # i3-swallow (https://github.com/jamesofarrell/i3-swallow)
+    pipx install i3-swallow
+
     # i3gem 
     cd ~/tools
     git clone git@github.com:MihailoIsakov/i3-groups.git
