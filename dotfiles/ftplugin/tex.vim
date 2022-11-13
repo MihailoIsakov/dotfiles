@@ -20,6 +20,10 @@ set display+=lastline
 "set tw=0
 set tw=80
 
+" Auto format paragraphs according to https://vim.fandom.com/wiki/Automatic_formatting_of_paragraphs
+"setl fo=aw2tq
+
+
 " vimtex is slow, this may help?
 " set nonumber
 " set norelativenumber
@@ -104,30 +108,29 @@ hi Conceal ctermfg=NONE guifg=NONE ctermbg=NONE guibg=NONE
 " Goyo + Limelight
 "
 map <C-g> :Goyo<CR>
+
+let g:goyo_width=85
+let g:goyo_height=1000
+
 highlight Normal ctermbg = 235 
 highlight nonText ctermbg = 235
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
-" Color name (:help cterm-colors) or ANSI code
-"let g:limelight_conceal_ctermfg = 'gray'
-"let g:limelight_conceal_ctermfg = 240
-
-" Color name (:help gui-colors) or RGB color
-" let g:limelight_conceal_guifg = 'DarkGray'
-" let g:limelight_conceal_guifg = '#777777'
-
-" default: 0.5
 let g:limelight_default_coefficient = 0.8
 
 " Number of preceding/following paragraphs to include (default: 0)
-"let g:limelight_paragraph_span = 1
+let g:limelight_paragraph_span = 0
 
-" Beginning/end of paragraph
-"   When there's no empty line between the paragraphs
-"   and each paragraph starts with indentation
-"let g:limelight_bop = '^\s'
+" Start at whitespace line or at a % symbol
+"let g:limelight_bop = '^%*\s'
+let g:limelight_bop = '^\s*%*\s*$\n\zs'
+
+" Stop at a % symbol
 "let g:limelight_eop = '\ze\n^\s'
+let g:limelight_eop = '^\s*%*\s*$' 
+
+
 
 " Highlighting priority (default: 10)
 "   Set it to -1 not to overrule hlsearch

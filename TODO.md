@@ -6,6 +6,8 @@
 - [ ] Desktop organization
     - [ ] Remove Desktop/, Downloads/, etc. 
     - [ ] Create my dirs 
+- [ ] Add vim spell file
+- [ ] Replace curl with wget
+
+# Done: 
 - [x] kitty dir
-- [ ] Move /etc/tlp.conf into here
-- [ ] try https://github.com/AdnanHodzic/auto-cpufreq

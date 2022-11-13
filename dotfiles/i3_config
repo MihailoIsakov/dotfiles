@@ -41,9 +41,13 @@ exec_always --no-startup-id killall i3-battery-popup.sh; i3-battery-popup.sh -L 
 # Owncloud appimage
 #exec --no-startup-id ~/tools/owncloud/ownCloud-2.11.0.8354.AppImage
 
+exec_always ~/.config/i3/scripts/gnome-keyring.sh
+
+# FRP client
+exec_always killall frpc; frpc -c ~/.config/frp/frpc.ini
 
 ####################################################################################################
-# Run custom commands or applications on key combinations                                                                              #
+# Run custom commands or applications on key combinations                                          #
 ####################################################################################################
 
 # start a terminal
@@ -131,6 +135,13 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+e layout toggle
 
 
+for_window [window_role="pop-up"]                       floating enable
+for_window [window_role="bubble"]                       floating enable 
+for_window [window_role="task_dialog"]                  floating enable
+for_window [window_role="Preferences"]                  floating enable
+for_window [window_type="dialog"]                       floating enable 
+for_window [window_type="menu"]                         floating enable
+
 ####################################################################################################
 # Floating settings                                                                                #
 ####################################################################################################
@@ -138,7 +149,7 @@ bindsym $mod+e layout toggle
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+f floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 # Make the currently focused window a scratchpad
@@ -227,7 +238,7 @@ bindsym $mod+Shift+r exec move-container-to-ws
 bindsym $mod+g       exec change-active-group
 bindsym $mod+Shift+g exec move-ws-to-group
 bindsym $mod+Shift+w exec make-workspace
-bindsym $mod+Shift+f exec ~/libs/rofi-file-selector/rofi-file-selector.sh
+#bindsym $mod+Shift+f exec ~/libs/rofi-file-selector/rofi-file-selector.sh
 bindsym $mod+v       exec rofi-virtualbox.sh
 #bindsym $mod+a       exec goto-shared-ws --key browser
 #bindsym $mod+s       exec goto-shared-ws --key roam
@@ -243,7 +254,7 @@ font pango:monospace 11
 #font pango:DejaVu Sans Mono 8
 
 # window border
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border pixel 2 2 2 2
 
 # class			        border  backgr. text    indicator
 client.focused          #333333 #F0C674 #000000 #F0C674

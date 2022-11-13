@@ -31,6 +31,14 @@ git config pull.rebase false  # merge strategy
 read -p "Install desktop applications and development environment? " -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
+
+    # NVIDIA driver
+    read -p "Install NVIDIA driver: nvidia-driver-515 ? " -n 1 -r
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        sudo apt install nvidia-driver-515
+    fi
+
     # environment, terminal
     sudo apt install i3 polybar rofi 
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
