@@ -39,6 +39,7 @@ alias co='git checkout'
 alias pull='git pull'
 alias gtc='git show --name-only'
 alias push='git push'
+alias amend='git commit --amend'
 
 # language specific tools
 alias ipy='ipython'

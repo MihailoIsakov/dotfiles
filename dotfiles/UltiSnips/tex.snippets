@@ -62,6 +62,12 @@ snippet beg "begin{} / end{}" bi
 \end{$1}
 endsnippet
 
+snippet roman "Enumerate w/ roman" bi
+\begin{enumerate*}[label=(\roman*)]
+	\item ${1:${VISUAL}}
+\end{enumerate*}
+endsnippet
+
 snippet eq "Equation" bi
 \begin{equation}
 	${1:${VISUAL}}

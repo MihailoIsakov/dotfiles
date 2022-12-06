@@ -1,5 +1,8 @@
 bin/brightness
 bin/powerline-go
 bin/inkscape
+bin/greenclip
+
 *.swo
 *.swp
+tags
