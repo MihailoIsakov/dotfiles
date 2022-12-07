@@ -29,6 +29,8 @@ ln -s -f $(pwd)/dotfiles/UltiSnips/         ~/.vim/UltiSnips
 mkdir -p ~/.config/i3/
 ln -s -f $(pwd)/dotfiles/i3_config          ~/.config/i3/config
 
+ln -s -f $(pwd)/dotfiles/greenclip.toml     ~/.config/
+
 mkdir -p ~/.config/zathura/
 ln -s -f $(pwd)/dotfiles/zathurarc          ~/.config/zathura/
 
