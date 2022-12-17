@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 # exit if any command fails
 set -e 
@@ -14,8 +14,7 @@ mkdir -p ~/libs/
 ################################################
 # bare necessities, possibly tied into configs #
 ################################################
-sudo apt install vim-gtk bash-completion mosh wget curl htop 
-sudo apt install python3.10 python3-pip python3.10-venv 
+sudo apt install -y vim-gtk bash-completion mosh wget curl htop python3.10 python3-pip python3.10-venv 
 
 # FZF Fuzzy search
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
@@ -30,11 +29,22 @@ git config pull.rebase false  # merge strategy
 read -p "Install laptop power management tools? " -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
+    echo "\n"
     sudo apt install powertop tlp smartmontools
     systemctl enable tlp.service
     systemctl mask power-profiles-daemon.service  # https://linrunner.de/tlp/faq/installation.html
 fi
 
+################################
+# Optionally generate SSH keys #
+# TODO: use setup_ssh.sh script
+################################
+# read -p "Generate new RSA keys in .ssh/id_rsa?" -n 1 -r
+# if [[ $REPLY =~ ^[Yy]$ ]]
+# then
+# 	echo "\n"
+#     ssh-keygen -t rsa -b 4096
+# fi
 
 #######################################
 # desktop setup, don't run on servers # 
@@ -42,48 +52,62 @@ fi
 read -p "Install desktop applications and development environment? " -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-
+    echo "\n"
     # NVIDIA driver
     read -p "Install NVIDIA driver: nvidia-driver-515 ? " -n 1 -r
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
-        sudo apt install nvidia-driver-515
+	echo "\n"
+	sudo apt install -y nvidia-driver-515
     fi
 
     # environment, terminal
-    sudo apt install i3 polybar rofi 
+    sudo apt install -y i3 polybar rofi 
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-    sudo snap install jump 
+
+    # Use pipx or virtualenvwrapper whenever possible
+    pip install virtualenv virtualenvwrapper pipx
 
     # virtualbox
     sudo apt install virtualbox
     # download the DPKG https://www.virtualbox.org/wiki/Linux_Downloads
 
-    # i3gem 
+    # clone and install i3gem if the repo doesn't already exist
     cd ~/tools
-    git clone git@github.com:MihailoIsakov/i3-groups.git
-    cd i3-groups
-    git checkout 1a8b823
-    pipx install -e .
+    if [ ! -d "i3-groups/" ]
+    then
+	echo "TEST\n"
+	git clone git@github.com:MihailoIsakov/i3-groups.git
+	cd i3-groups
+	git checkout 1a8b823
+	pipx install -e .
+    fi
 
     # apps
-    sudo apt install arandr gnome-screenshot pm-utils pavucontrol zathura nmap gthumb
-    sudo snap install xdotool
+    sudo apt install -y arandr gnome-screenshot pm-utils pavucontrol zathura nmap gthumb xdotool
 
     # libs, python3-tk is needed for Matplotlib
-    sudo apt install npm nodejs python3-tk libncurses5
-
-    # Use pipx or virtualenvwrapper whenever possible
-    pip install virtualenv virtualenvwrapper pipx
+    sudo apt install -y npm nodejs python3-tk libncurses5
 
     # fonts
-    sudo apt install fonts-firacode fonts-powerline
+    sudo apt install -y fonts-firacode fonts-powerline
+
+    # development
+    sudo apt install -y universal-ctags
 
     # Greenclip manager 
+    cd ~
+    if [ ! -d "bin/" ]
+    then
+    	mkdir bin
+    fi
     wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip -O ~/bin/greenclip
+    chmod +x bin/greenclip
 
     # pipx install tldr powerline-shell
     # TODO: automate downloading a powerline-go release?
+    wget https://github.com/justjanne/powerline-go/releases/download/v1.22.1/powerline-go-linux-amd64 -O ~/bin/powerline-go
+    chmod 
 
     # TODO: flake8 in pip? 
 
@@ -99,7 +123,7 @@ then
     read -p "Install graphics tools and LibreOffice? " -n 1 -r
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
-        sudo apt install inkscape imagemagick gimp
+        sudo apt install -y inkscape imagemagick gimp
         sudo snap install libreoffice 
     fi
 
@@ -107,8 +131,12 @@ then
     # Require manual installation #
     ###############################
     # Google Chrome installed from DPKdG
-    # Owncloud
+
+    printf "\n\n\n################################################################################"
+    printf "# You still need to manually install chrome, dropbox, obsidian, & powerline-go #"
+    printf "################################################################################\n\n\n"
+
 fi
 
-
+sudo apt autoremove
 
