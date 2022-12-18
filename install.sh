@@ -14,15 +14,26 @@ mkdir -p ~/libs/
 ################################################
 # bare necessities, possibly tied into configs #
 ################################################
-sudo apt install vim-gtk python3-pip bash-completion mosh wget curl htop 
+sudo apt install vim-gtk bash-completion mosh wget curl htop 
+sudo apt install python3.10 python3-pip python3.10-venv 
 
-# Fuzzy search
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install
+# FZF Fuzzy search
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 
 git config --global user.email "isakov.m@gmail.com"
 git config --global user.name  "Mihailo Isakov"
 git config pull.rebase false  # merge strategy
+
+###########################
+# Laptop power management #
+###########################
+read -p "Install laptop power management tools? " -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    sudo apt install powertop tlp smartmontools
+    systemctl enable tlp.service
+    systemctl mask power-profiles-daemon.service  # https://linrunner.de/tlp/faq/installation.html
+fi
 
 
 #######################################
@@ -44,11 +55,6 @@ then
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
     sudo snap install jump 
 
-    # laptop-specific: power and stuff
-    sudo apt install powertop tlp smartmontools
-    systemctl enable tlp.service
-    systemctl mask power-profiles-daemon.service  # https://linrunner.de/tlp/faq/installation.html
-
     # virtualbox
     sudo apt install virtualbox
     # download the DPKG https://www.virtualbox.org/wiki/Linux_Downloads
@@ -65,21 +71,24 @@ then
 
     # apps
     sudo apt install arandr gnome-screenshot pm-utils pavucontrol zathura nmap gthumb
-    sudo snap install libreoffice xdotool
+    sudo snap install xdotool
 
     # libs, python3-tk is needed for Matplotlib
-    sudo apt install npm nodejs python3.10-venv python3-tk libncurses5
+    sudo apt install npm nodejs python3-tk libncurses5
 
     # Use pipx or virtualenvwrapper whenever possible
     pip install virtualenv virtualenvwrapper pipx
+
+    # fonts
+    sudo apt install fonts-firacode fonts-powerline
+
+    # Greenclip manager 
+    wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip -O ~/bin/greenclip
 
     # pipx install tldr powerline-shell
     # TODO: automate downloading a powerline-go release?
 
     # TODO: flake8 in pip? 
-
-    # fonts
-    sudo apt install fonts-firacode fonts-powerline
 
     # rofi file selector
     # sudo apt install fd-find xsel
@@ -88,14 +97,20 @@ then
     # chmod +x ~/bin/choose
     
     # Default applications
-    xdg-mime default org.pwmt.zathura.desktop application/pdf
+    #xdg-mime default org.pwmt.zathura.desktop application/pdf
+
+    read -p "Install graphics tools and LibreOffice? " -n 1 -r
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        sudo apt install inkscape imagemagick gimp
+        sudo snap install libreoffice 
+    fi
 
     ###############################
     # Require manual installation #
     ###############################
     # Google Chrome installed from DPKdG
     # Owncloud
-    # sudo apt install nvidia-driver-495
 fi
 
 

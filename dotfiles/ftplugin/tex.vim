@@ -1,4 +1,14 @@
 set spell
+set spelllang=en
+set spellcapcheck
+
+" Taken from (http://www.panozzaj.com/blog/2016/03/21/ignore-urls-and-acroynms-while-spell-checking-vim/)
+" Don't count acronyms / abbreviations as spelling errors
+" (all upper-case letters, at least three characters)
+" Also will not count acronym with 's' at the end a spelling error
+" Also will not count numbers that are part of this
+" Recognizes the following as correct:
+syn match AcronymNoSpell '\<\(\u\|\d\)\{2,}s\?\>' contains=@NoSpell
 
 " On pressing tab, insert 2 spaces
 set expandtab
@@ -96,7 +106,7 @@ augroup END
 "   " Taken from https://castel.dev/post/lecture-notes-1/
 "   let g:tex_flavor='latex'
 "   let g:vimtex_view_method='zathura'
-let g:vimtex_quickfix_mode=0
+let g:vimtex_quickfix_mode=1
 set conceallevel=0
 let g:tex_conceal='abdmg'
 

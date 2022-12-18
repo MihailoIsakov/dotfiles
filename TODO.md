@@ -1,4 +1,22 @@
 # To-do list: 
+
+## Dotfiles:
+- [ ] Add Obsidian to install.sh
+- [ ] Add Plover to install.sh
+
+## Keyboard:
+- [ ] Build wireless keyboard 
+- [ ] Switch to Colemak
+
+## I3:
+- [ ] Try out QTile
+- [ ] Fix i3-groups script 
+- [ ] Fix clone_term.sh script
+- [ ] Tie multiple scratchpads to custom keys
+
+## System:
+- [ ] Swallow Zathura setup: https://github.com/salman-abedin/devour#pro-tip
+- [ ] Check if I need a custom launch script (https://github.com/salman-abedin/devour#pro-tip)
 - [ ] Centralized way to manage $PATH?
 - [ ] Transition to GNU stow
 - [ ] Move .config/user-dirs.dirs into dotfiles
@@ -6,8 +24,11 @@
 - [ ] Desktop organization
     - [ ] Remove Desktop/, Downloads/, etc. 
     - [ ] Create my dirs 
-- [ ] Add vim spell file
 - [ ] Replace curl with wget
 
-# Done: 
-- [x] kitty dir
+## Graphics:
+- [ ] Use a compositor to dim inactive windows
+
+## Editor:
+- [ ] Add vim spell file to dotfiles
+

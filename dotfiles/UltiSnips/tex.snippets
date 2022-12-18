@@ -62,6 +62,27 @@ snippet beg "begin{} / end{}" bi
 \end{$1}
 endsnippet
 
+snippet roman "Enumerate w/ roman" bi
+\begin{enumerate*}[label=(\roman*)]
+	\item ${1:${VISUAL}}
+\end{enumerate*}
+endsnippet
+
+snippet eq "Equation" bi
+\begin{equation}
+	${1:${VISUAL}}
+\end{equation}
+endsnippet
+
+snippet align "Aligned equation" bi
+\begin{equation}
+\begin{aligned}
+	${1:${VISUAL}}
+\end{aligned}
+\end{equation}
+endsnippet
+
+
 # snippet cnt "Center" bi
 # \begin{center}
 # 	${0:${VISUAL}}
@@ -147,9 +168,9 @@ endsnippet
 # endsnippet
 
 snippet fig "Figure environment" bi
-\begin{figure}[${1:htpb}]
+\begin{figure}[h]
 	\centering
-	${2:\includegraphics[width=0.8\textwidth]{$3}}
+	${2:\includegraphics[width=0.99\textwidth]{$3}}
 	\caption{${4:$3}}
 	\label{fig:${5:${3/\W+/-/g}}}
 \end{figure}
@@ -223,6 +244,10 @@ endsnippet
 
 snippet nnn "bigcap" w
 \bigcap_{${1:i \in ${2: I}}} $0
+endsnippet
+
+snippet NN "N" w
+\mathbb{N}
 endsnippet
 
 snippet HH "H" w

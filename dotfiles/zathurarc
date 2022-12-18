@@ -4,6 +4,9 @@
 # copy to clipboard
 set selection-clipboard clipboard
 
+# dual page in left column
+set first-page-column 1
+
 # trying to get inverse search to work
 # set synctex-editor-command "vim --servername +%{1} --remote-silent +%{line} %{input}"
 set synctex-editor-command "beep"
