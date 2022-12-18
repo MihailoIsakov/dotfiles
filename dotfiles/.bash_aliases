@@ -16,6 +16,9 @@ alias ls='ls --group-directories-first --color'
 alias ll='ls -latrh'
 alias ld='ls -la | grep "^d" && ls -la | grep "^-" && ls -la | grep "^l"'
 
+# grep stuff
+alias grrep='grep -r'
+
 # Clone terminal
 alias cl='clone_term.sh'
 
