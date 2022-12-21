@@ -71,7 +71,7 @@ shopt -s checkwinsize
 #shopt -s globstar
 
 # Jump (https://github.com/gsamokovarov/jump) shell integration
-eval "$(jump shell)"
+# eval "$(jump shell)"
 
 # ssh agent 
 if [ -f ~/.ssh/agent.env ] ; then

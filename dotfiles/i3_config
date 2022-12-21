@@ -61,7 +61,9 @@ exec_always killall frpc; frpc -c ~/.config/frp/frpc.ini
 # start a terminal
 bindsym $mod+Return exec .local/kitty.app/bin/kitty
 #bindsym $mod+Shift+Return exec gnome-terminal
-bindsym $mod+Shift+Return exec clone_term.sh
+
+# moved terminal duplicating functionality to kitty, due to reliability issues
+# bindsym $mod+Shift+Return exec clone_term.sh 
 
 # rofi with window, command, dmenu and ssh
 # bindsym $mod+Tab          exec i3-workspace-switcher.sh

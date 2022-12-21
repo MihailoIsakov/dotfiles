@@ -18,10 +18,10 @@ ln -s -f $(pwd)/dotfiles/.flake8            ~/
 
 # Not working since ~/bin/kitty is a symlink to ~/.local/kitty.app/bin/kitty
 # What's a good way to solve this? 
-ln -s    $(pwd)/dotfiles/kitty/             ~/.config/kitty
+ln -s -f $(pwd)/dotfiles/kitty/             ~/.config/kitty
 
 # FIXME: do we need the / at the end? 
-ln -s -f $(pwd)/dotfiles/polybar/           ~/.config/polybar/
+ln -s -f $(pwd)/dotfiles/polybar/           ~/.config/polybar
 
 ln -s -f $(pwd)/dotfiles/ftplugin/          ~/.vim/ftplugin
 ln -s -f $(pwd)/dotfiles/UltiSnips/         ~/.vim/UltiSnips

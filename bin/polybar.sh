@@ -2,7 +2,7 @@
 
 killall polybar
 
-if [[ $(hostname -s) = zver ]]; 
+if [[ $(hostname -s) = mihailo-thin ]]; 
 then
     MONITOR="DP-0"   polybar main &
     MONITOR="DP-2"   polybar main &
