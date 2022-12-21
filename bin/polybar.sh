@@ -1,6 +1,6 @@
 #! /bin/bash
 
-# killall polybar
+killall polybar
 
 if [[ $(hostname -s) = zver ]]; 
 then
