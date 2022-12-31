@@ -113,7 +113,8 @@ then
     sudo apt install -y arandr gnome-screenshot pm-utils pavucontrol zathura nmap gthumb xdotool
 
     # libs, python3-tk is needed for Matplotlib
-    sudo apt install -y npm nodejs python3-tk libncurses5
+    sudo apt install -y npm nodejs python3-tk libncurses5 watchman
+
 
     # fonts
     sudo apt install -y fonts-firacode fonts-powerline
@@ -122,13 +123,9 @@ then
     sudo apt install -y universal-ctags
 
     # Greenclip manager 
-    cd ~
-    if [ ! -d "bin/" ]
-    then
-    	mkdir bin
-    fi
+    mkdir -p ~/bin
     wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip -O ~/bin/greenclip
-    chmod +x bin/greenclip
+    chmod +x ~/bin/greenclip
 
     # pipx install tldr powerline-shell
     # TODO: automate downloading a powerline-go release?
