@@ -62,7 +62,7 @@ then
     fi
 
     # environment, terminal
-    sudo apt install -y i3 polybar rofi 
+    sudo apt install -y i3 polybar rofi compton
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 
     # Use pipx or virtualenvwrapper whenever possible
