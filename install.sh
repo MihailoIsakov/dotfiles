@@ -39,12 +39,38 @@ fi
 # Optionally generate SSH keys #
 # TODO: use setup_ssh.sh script
 ################################
-# read -p "Generate new RSA keys in .ssh/id_rsa?" -n 1 -r
-# if [[ $REPLY =~ ^[Yy]$ ]]
-# then
-# 	echo "\n"
-#     ssh-keygen -t rsa -b 4096
-# fi
+read -p "Generate new RSA keys in .ssh/id_rsa? " -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    cd ~
+    echo "\n"
+    ssh-keygen -t ed25519 -C "isakov.m@gmail.com"
+
+    # start agent
+    eval "$(ssh-agent -s)"
+
+    # add keys 
+    ssh-add ~/.ssh/id_ed25519
+fi
+
+
+read -p "Start SSHD, download pub keys from GitHub, and add them authorized_keys? " -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]
+then 
+    sudo apt install -y openssh-server
+    sudo ufw allow ssh
+    sudo ufw enable && sudo ufw reload
+
+    mkdir -p .ssh/
+    wget https://github.com/MihailoIsakov.keys -O ~/.ssh/authorized_keys
+
+    chmod -R go= ~/.ssh
+    chown -R mihailo:mihailo ~/.ssh
+
+    sudo systemctl restart ssh
+fi
+
+
 
 #######################################
 # desktop setup, don't run on servers # 
