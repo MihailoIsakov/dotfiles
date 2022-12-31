@@ -34,7 +34,7 @@ disabled       = #707880
 monitor = ${env:MONITOR:}
 
 modules-left = workspace_groups
-; modules-right = pulseaudio battery memory cpu date
+; modules-right = spotify pulseaudio battery cpu memory date
 modules-right = pulseaudio battery cpu memory date
 
 width = 100%
