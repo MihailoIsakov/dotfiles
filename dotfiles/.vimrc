@@ -128,6 +128,13 @@ vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 map <c-n> :bn<CR>
 map <c-p> :bp<CR>
 
+" Unmap help menu on F1
+nmap <F1> :echo<CR>
+imap <F1> <C-o>:echo<CR>
+
+" Unmap ex mode
+map Q <nop>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                     Low level behavior                     "
@@ -236,6 +243,11 @@ let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'  " use Shift-Tab to move backward
 " NERDTree
 nnoremap <C-t> :NERDTreeToggle<CR>
 
+" NERDCommenter
+let g:NERDCreateDefaultMappings = 0
+let g:NERDDefaultAlign = 'left'
+let g:NERDCommentEmptyLines = 1
+
 
 " Gitgutter: 
 let g:gitgutter_highlight_lines=0
@@ -257,7 +269,7 @@ let g:airline#extensions#wordcount#filetypes = '\vnotes|help|markdown|rst|org|te
 set tags=tags;/
 
 " Easymotion 
-map <Leader> <Plug>(easymotion-prefix)
+" map <Leader> <Plug>(easymotion-prefix)
 nmap <C-s> <Plug>(easymotion-s)
 
 
