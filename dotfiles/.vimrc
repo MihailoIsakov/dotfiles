@@ -104,7 +104,8 @@ vmap < <gv
 vmap > >gv
 
 " To allow walking over strings using _, something_like_this
-set iskeyword-=_
+" set iskeyword-=_
+set iskeyword+=-
 
 " Center line in Normal mode
 nmap <space> zz
