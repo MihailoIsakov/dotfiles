@@ -116,7 +116,8 @@ bind 'set match-hidden-files off'
 ######################
 function _update_ps1() {
     #PS1="$(/home/mihailo/bin/powerline-go -error $? -jobs $(jobs -p | wc -l))"
-    PS1=$(/home/mihailo/bin/powerline-go -error $? -cwd-max-depth 10 -modules="time,ssh,venv,cwd,git,newline" -theme "gruvbox" )
+    #PS1=$(/home/mihailo/bin/powerline-go -error $? -cwd-max-depth 10 -modules="time,ssh,venv,cwd,git,newline" -theme "gruvbox" )
+    PS1=$(/home/mihailo/bin/powerline-go -error $? -cwd-max-depth 1 -modules="time,ssh,venv,cwd,git,newline" -theme "gruvbox" )
 
     # Uncomment the following line to automatically clear errors after showing
     # them once. This not only clears the error for powerline-go, but also for
