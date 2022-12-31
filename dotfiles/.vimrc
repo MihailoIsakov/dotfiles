@@ -26,12 +26,15 @@ set hidden
 
 " Theme settings
 colorscheme molokai
-let g:rehash256 = 1
-set background=dark
+"colorscheme gruvbox
+" autocmd vimenter * ++nested colorscheme gruvbox
 highlight Normal ctermbg=NONE
 highlight nonText ctermbg=NONE
 " Airline theme to match
-let g:airline_theme = "molokai"
+ let g:airline_theme = "luna"
+"let g:airline_theme = "gruvbox"
+let g:rehash256 = 1
+set background=dark
 
 " Airline tabs for open buffers -- Install tabline
 let g:airline#extensions#tabline#enabled = 1
