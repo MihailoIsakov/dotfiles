@@ -253,6 +253,9 @@ let g:NERDCreateDefaultMappings = 0
 let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
 
+nmap <leader>cc <plug>NERDCommenterInvert
+xmap <leader>cc <plug>NERDCommenterInvert
+
 
 " Gitgutter: 
 let g:gitgutter_highlight_lines=0
