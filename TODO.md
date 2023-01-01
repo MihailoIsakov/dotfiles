@@ -3,6 +3,7 @@
 ## Dotfiles:
 - [ ] Add Obsidian to install.sh
 - [ ] Add Plover to install.sh
+- [ ] Add cscope? 
 
 ## Keyboard:
 - [ ] Build wireless keyboard 
@@ -11,8 +12,8 @@
 ## I3:
 - [ ] Try out QTile
 - [ ] Fix i3-groups script 
-- [ ] Fix clone_term.sh script
-- [ ] Tie multiple scratchpads to custom keys
+- [x] Fix clone_term.sh script
+- [x] Tie multiple scratchpads to custom keys
 
 ## System:
 - [ ] Swallow Zathura setup: https://github.com/salman-abedin/devour#pro-tip
@@ -27,7 +28,7 @@
 - [ ] Replace curl with wget
 
 ## Graphics:
-- [ ] Use a compositor to dim inactive windows
+- [x] Use a compositor to dim inactive windows
 
 ## Editor:
 - [ ] Add vim spell file to dotfiles
