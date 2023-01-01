@@ -136,6 +136,10 @@ imap <F1> <C-o>:echo<CR>
 " Unmap ex mode
 map Q <nop>
 
+" Unmap mute key? 
+noremap XF86AudioMute <nop>
+noremap 121 <nop>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                     Low level behavior                     "
