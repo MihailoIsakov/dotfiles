@@ -248,6 +248,11 @@ let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'  " use Shift-Tab to move backward
 " NERDTree
 nnoremap <C-t> :NERDTreeToggle<CR>
 
+" Close NERDTree when opening a file
+let g:NERDTreeQuitOnOpen = 1
+
+
+
 " NERDCommenter
 let g:NERDCreateDefaultMappings = 0
 let g:NERDDefaultAlign = 'left'
