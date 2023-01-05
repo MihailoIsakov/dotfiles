@@ -31,6 +31,20 @@ exec_always --no-startup-id rename-workspace -n "shared:1"
 # battery notification
 exec_always --no-startup-id killall i3-battery-popup.sh; i3-battery-popup.sh -L 30 -m "Battery!" -s /usr/share/sounds/freedesktop/stereo/power-unplug.oga -v 70 -n
 
+# Startup programs
+workspace chrome output DP-4
+workspace obsidian output DP-4
+workspace todo output DP-4
+
+for_window [class="Spotify"] , move scratchpad
+for_window [instance="todoist"] , move scratchpad
+for_window [class="obsidian"] , move scratchpad
+for_window [class="google-chrome"] , move scratchpad
+
+bindsym $mod+z exec scratchpad.sh spotify
+bindsym $mod+x exec scratchpad.sh todoist
+bindsym $mod+c exec scratchpad.sh google-chrome
+bindsym $mod+v exec scratchpad.sh obsidian
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the screen before suspend. Use loginctl lock-session to lock your screen.
 # exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
