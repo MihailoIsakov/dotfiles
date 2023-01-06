@@ -31,6 +31,8 @@ ln -s -f $(pwd)/dotfiles/i3_config          ~/.config/i3/config
 
 ln -s -f $(pwd)/dotfiles/greenclip.toml     ~/.config/
 
+ln -s -f $(pwd)/dotfiles/compton.conf       ~/.config/compton.conf
+
 mkdir -p ~/.config/zathura/
 ln -s -f $(pwd)/dotfiles/zathurarc          ~/.config/zathura/
 
