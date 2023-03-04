@@ -34,7 +34,7 @@ disabled       = #707880
 monitor = ${env:MONITOR:}
 
 modules-left = workspace_groups
-; modules-right = pulseaudio battery memory cpu date
+; modules-right = spotify pulseaudio battery cpu memory date
 modules-right = pulseaudio battery cpu memory date
 
 width = 100%
@@ -79,7 +79,7 @@ enable-ipc = true
 
 [module/workspace_groups]
 type = custom/script
-exec = i3-groups-polybar
+exec = i3-groups-polybar -m $MONITOR
 tail = true
 ; interval = 5
 scroll-up = next-ws-in-group
@@ -121,7 +121,28 @@ type = internal/memory
 interval = 2
 format-prefix = "RAM "
 format-prefix-foreground = ${colors.primary}
-label = %percentage_used:2%%
+format = <label> <bar-used> <bar-swap-used>
+label = %percentage_used:2%%  %percentage_swap_used:2%%
+
+bar-used-indicator =
+bar-used-width = 10
+bar-used-foreground-0 = #55aa55
+bar-used-foreground-1 = #557755
+bar-used-foreground-2 = #f5a70a
+bar-used-foreground-3 = #ff5555
+bar-used-fill = ▐
+bar-used-empty = ▐
+bar-used-empty-foreground = #444444
+
+bar-swap-used-indicator =
+bar-swap-used-width = 10
+bar-swap-used-foreground-0 = #55aa55
+bar-swap-used-foreground-1 = #557755
+bar-swap-used-foreground-2 = #f5a70a
+bar-swap-used-foreground-3 = #ff5555
+bar-swap-used-fill = ▐
+bar-swap-used-empty = ▐
+bar-swap-used-empty-foreground = #444444
 
 
 [module/cpu]

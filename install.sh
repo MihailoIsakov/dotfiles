@@ -39,12 +39,38 @@ fi
 # Optionally generate SSH keys #
 # TODO: use setup_ssh.sh script
 ################################
-# read -p "Generate new RSA keys in .ssh/id_rsa?" -n 1 -r
-# if [[ $REPLY =~ ^[Yy]$ ]]
-# then
-# 	echo "\n"
-#     ssh-keygen -t rsa -b 4096
-# fi
+read -p "Generate new RSA keys in .ssh/id_rsa? " -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    cd ~
+    echo "\n"
+    ssh-keygen -t ed25519 -C "isakov.m@gmail.com"
+
+    # start agent
+    eval "$(ssh-agent -s)"
+
+    # add keys 
+    ssh-add ~/.ssh/id_ed25519
+fi
+
+
+read -p "Start SSHD, download pub keys from GitHub, and add them authorized_keys? " -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]
+then 
+    sudo apt install -y openssh-server
+    sudo ufw allow ssh
+    sudo ufw enable && sudo ufw reload
+
+    mkdir -p .ssh/
+    wget https://github.com/MihailoIsakov.keys -O ~/.ssh/authorized_keys
+
+    chmod -R go= ~/.ssh
+    chown -R mihailo:mihailo ~/.ssh
+
+    sudo systemctl restart ssh
+fi
+
+
 
 #######################################
 # desktop setup, don't run on servers # 
@@ -62,7 +88,7 @@ then
     fi
 
     # environment, terminal
-    sudo apt install -y i3 polybar rofi 
+    sudo apt install -y i3 polybar rofi compton
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 
     # Use pipx or virtualenvwrapper whenever possible
@@ -90,7 +116,8 @@ then
     sudo apt install -y arandr gnome-screenshot pm-utils pavucontrol zathura nmap gthumb xdotool
 
     # libs, python3-tk is needed for Matplotlib
-    sudo apt install -y npm nodejs python3-tk libncurses5
+    sudo apt install -y npm nodejs python3-tk libncurses5 watchman
+
 
     # fonts
     sudo apt install -y fonts-firacode fonts-powerline
@@ -99,13 +126,9 @@ then
     sudo apt install -y universal-ctags
 
     # Greenclip manager 
-    cd ~
-    if [ ! -d "bin/" ]
-    then
-    	mkdir bin
-    fi
+    mkdir -p ~/bin
     wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip -O ~/bin/greenclip
-    chmod +x bin/greenclip
+    chmod +x ~/bin/greenclip
 
     # pipx install tldr powerline-shell
     # TODO: automate downloading a powerline-go release?

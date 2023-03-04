@@ -31,8 +31,13 @@ ln -s -f $(pwd)/dotfiles/i3_config          ~/.config/i3/config
 
 ln -s -f $(pwd)/dotfiles/greenclip.toml     ~/.config/
 
+ln -s -f $(pwd)/dotfiles/compton.conf       ~/.config/compton.conf
+
 mkdir -p ~/.config/zathura/
 ln -s -f $(pwd)/dotfiles/zathurarc          ~/.config/zathura/
+
+mkdir -p ~/.config/nvim/
+ln -s -f $(pwd)/dotfiles/init.lua           ~/.config/nvim/init.lua
 
 mkdir -p ~/.config/powerline-shell/
 ln -s -f $(pwd)/dotfiles/powerline-shell/config.json ~/.config/powerline-shell/config.json

@@ -3,6 +3,9 @@
 # exit if any command fails
 set -e
 
+# setup the undo history directory
+mkdir ~/.vim/undodir
+
 # install the molokai theme
 mkdir -p ~/.vim/colors
 curl https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim --output ~/.vim/colors/molokai.vim
@@ -19,7 +22,6 @@ git clone https://tpope.io/vim/sleuth.git
 vim -u NONE -c "helptags fugitive/doc" -c q
 vim -u NONE -c "helptags sleuth/doc" -c q
 
-
 git clone https://github.com/vim-airline/vim-airline          ~/.vim/bundle/vim-airline
 git clone https://github.com/vim-airline/vim-airline-themes   ~/.vim/bundle/vim-airline-themes
 git clone https://github.com/preservim/nerdcommenter.git      ~/.vim/bundle/nerdcommenter
@@ -34,6 +36,7 @@ git clone https://github.com/junegunn/limelight.vim           ~/.vim/bundle/lime
 git clone https://github.com/SirVer/ultisnips                 ~/.vim/bundle/ultisnips
 git clone https://github.com/ludovicchabant/vim-gutentags.git ~/.vim/bundle/vim-gutentags.git
 git clone https://github.com/matze/vim-tex-fold               ~/.vim/bundle/vim-tex-fold.git
+git clone https://github.com/preservim/nerdtree.git           ~/.vim/bundle/nerdtree
 
 # coc.nvim setup 
 curl -sL install-node.vercel.app/lts | sudo bash

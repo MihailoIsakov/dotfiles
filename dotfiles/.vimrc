@@ -26,12 +26,15 @@ set hidden
 
 " Theme settings
 colorscheme molokai
-let g:rehash256 = 1
-set background=dark
+"colorscheme gruvbox
+" autocmd vimenter * ++nested colorscheme gruvbox
 highlight Normal ctermbg=NONE
 highlight nonText ctermbg=NONE
 " Airline theme to match
-let g:airline_theme = "molokai"
+ let g:airline_theme = "luna"
+"let g:airline_theme = "gruvbox"
+let g:rehash256 = 1
+set background=dark
 
 " Airline tabs for open buffers -- Install tabline
 let g:airline#extensions#tabline#enabled = 1
@@ -101,7 +104,8 @@ vmap < <gv
 vmap > >gv
 
 " To allow walking over strings using _, something_like_this
-set iskeyword-=_
+" set iskeyword-=_
+set iskeyword+=-
 
 " Center line in Normal mode
 nmap <space> zz
@@ -124,6 +128,17 @@ vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 " change buffers on ctrl+n (next buffer) and ctrl+p (previous buffer)
 map <c-n> :bn<CR>
 map <c-p> :bp<CR>
+
+" Unmap help menu on F1
+nmap <F1> :echo<CR>
+imap <F1> <C-o>:echo<CR>
+
+" Unmap ex mode
+map Q <nop>
+
+" Unmap mute key? 
+noremap XF86AudioMute <nop>
+noremap 121 <nop>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -233,6 +248,19 @@ let g:UltiSnipsJumpBackwardTrigger = '<S-Tab>'  " use Shift-Tab to move backward
 " NERDTree
 nnoremap <C-t> :NERDTreeToggle<CR>
 
+" Close NERDTree when opening a file
+let g:NERDTreeQuitOnOpen = 1
+
+
+
+" NERDCommenter
+let g:NERDCreateDefaultMappings = 0
+let g:NERDDefaultAlign = 'left'
+let g:NERDCommentEmptyLines = 1
+
+nmap <leader>cc <plug>NERDCommenterInvert
+xmap <leader>cc <plug>NERDCommenterInvert
+
 
 " Gitgutter: 
 let g:gitgutter_highlight_lines=0
@@ -254,7 +282,7 @@ let g:airline#extensions#wordcount#filetypes = '\vnotes|help|markdown|rst|org|te
 set tags=tags;/
 
 " Easymotion 
-map <Leader> <Plug>(easymotion-prefix)
+" map <Leader> <Plug>(easymotion-prefix)
 nmap <C-s> <Plug>(easymotion-s)
 
 

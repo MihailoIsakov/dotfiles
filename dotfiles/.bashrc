@@ -23,6 +23,12 @@ if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integr
 
 # xterm-kitty causes problems when SSH-ing into the machine
 export TERM=xterm-256color
+# BoolSi verilate project installation script says we need this
+export CXX="g++"
+export SYSTEMC_HOME="/opt/systemc"
+export SYSTEMC_INCLUDE="${SYSTEMC_HOME}/include"
+export SYSTEMC_LIBDIR="${SYSTEMC_HOME}/lib"
+export VERILATOR_BIN="${dir_tools}/verilator/bin"
 
 ####################################################################################################
 # Colors and UX                                                                                    # 
@@ -119,7 +125,8 @@ bind 'set match-hidden-files off'
 ######################
 function _update_ps1() {
     #PS1="$(/home/mihailo/bin/powerline-go -error $? -jobs $(jobs -p | wc -l))"
-    PS1=$(/home/mihailo/bin/powerline-go -error $? -cwd-max-depth 10 -modules="time,ssh,venv,cwd,git,newline" -theme "gruvbox" )
+    #PS1=$(/home/mihailo/bin/powerline-go -error $? -cwd-max-depth 10 -modules="time,ssh,venv,cwd,git,newline" -theme "gruvbox" )
+    PS1=$(/home/mihailo/bin/powerline-go -error $? -cwd-max-depth 1 -modules="time,ssh,venv,cwd,git,newline" -theme "gruvbox" )
 
     # Uncomment the following line to automatically clear errors after showing
     # them once. This not only clears the error for powerline-go, but also for
