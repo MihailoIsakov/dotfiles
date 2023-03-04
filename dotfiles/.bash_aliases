@@ -31,6 +31,7 @@ alias diffw='git diff --word-diff'
 alias diffwd='git diff --word-diff-regex=.'
 alias diffc='git diff --color-words --word-diff-regex=.'
 alias diffca='git diff --color-words --word-diff --no-prefix -U1000'
+alias cached='git diff --cached'
 alias gdt='git difftool'
 alias commit='git commit'
 alias add='git add'
@@ -48,6 +49,9 @@ alias activate='source source_venv'
 
 # enable aliases in non-interactive shells like vim
 shopt -s expand_aliases
+
+# clear vim since kitty sometimes mangles the terminal outputs
+alias vim='clear; nvim'
 
 # kitty clipboard
 alias cb='kitty +kitten clipboard'
