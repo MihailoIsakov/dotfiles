@@ -21,6 +21,9 @@ export PATH="$PATH:/home/mihailo/.local/bin"
 if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
 # END_KITTY_SHELL_INTEGRATION
 
+# xterm-kitty causes problems when SSH-ing into the machine
+export TERM=xterm-256color
+
 ####################################################################################################
 # Colors and UX                                                                                    # 
 ####################################################################################################

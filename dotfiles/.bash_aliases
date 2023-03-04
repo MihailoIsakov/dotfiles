@@ -56,7 +56,7 @@ shopt -s expand_aliases
 alias cb='kitty +kitten clipboard'
 
 # kitty ssh
-alias s="kitty +kitten ssh"
+alias kssh="kitty +kitten ssh"
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert

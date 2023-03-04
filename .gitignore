@@ -3,6 +3,7 @@ bin/brightness
 bin/powerline-go
 bin/inkscape
 bin/greenclip
+bin/obsidian
 
 *.swo
 *.swp
