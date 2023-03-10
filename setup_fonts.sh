@@ -12,6 +12,15 @@ cd /tmp
 wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
 wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
 
+# Download Nerd Fonts
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/NerdFontsSymbolsOnly.zip
+# manually install nerd fonts, then run 
+#   `fc-cache -r`
+# check that kitty is picking up the fonts using
+#   `kitty --debug-font-fallback`
+# check available fonts using:
+#   `kitty +list-fonts`
+
 # Move the symbol font to a valid X font path. 
 # Valid font paths can be listed with xset q: 
 mkdir -p ~/.local/share/fonts/
