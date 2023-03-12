@@ -44,6 +44,7 @@ alias pull='git pull'
 alias gtc='git show --name-only'
 alias push='git push'
 alias amend='git commit --amend'
+alias git-vimdiff='git difftool tool=vimdiff'
 
 # language specific tools
 alias ipy='ipython'
