@@ -64,7 +64,7 @@ exec --no-startup-id dropbox start
 exec_always ~/.config/i3/scripts/gnome-keyring.sh
 
 # FRP client
-exec_always killall frpc; frpc -c ~/.config/frp/frpc.ini
+# exec_always killall frpc; frpc -c ~/.config/frp/frpc.ini
 
 ####################################################################################################
 # Run custom commands or applications on key combinations                                          #
@@ -86,7 +86,7 @@ bindsym $mod+Shift+s      exec rofi -show ssh    -i3 -ssh-command '/home/mihailo
 bindsym $mod+Shift+Ctrl+v exec rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
 
 # Locks i3
-bindsym $mod+x exec lock
+bindsym $mod+x exec i3lock
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -279,7 +279,7 @@ font pango:monospace 11
 
 # window border
 # for_window [class="^.*"] border pixel 10 20 30 40
-for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] border pixel 1
 # hide_edge_borders both
 
 # popups
