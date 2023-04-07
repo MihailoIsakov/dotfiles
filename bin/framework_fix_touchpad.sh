@@ -1,3 +1,3 @@
 #! /bin/sh
 
-xinput set-prop 12 335 1
+xinput set-prop 11 335 1
