@@ -17,6 +17,9 @@ source "/home/mihailo/.local/bin/virtualenvwrapper.sh"
 # Created by `pipx` on 2022-01-21 17:21:54
 export PATH="$PATH:/home/mihailo/.local/bin"
 
+# Hide __pycache__ directories
+PYTHONPYCACHEPREFIX="."
+
 # BEGIN_KITTY_SHELL_INTEGRATION
 if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
 # END_KITTY_SHELL_INTEGRATION
