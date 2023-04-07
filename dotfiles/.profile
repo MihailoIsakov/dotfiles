@@ -37,6 +37,7 @@ PATH=$PATH:/usr/local/bin/
 # setup screens
 # /home/mihailo/.screenlayout/lab.sh
 
+# TODO: move to i3 config
 # faster keyboard
 xset r rate 180 60
 
@@ -55,6 +56,18 @@ export WORKON_HOME=$HOME/.virtualenvs
 export TERM=/home/mihailo/.local/kitty.app/bin/kitty
 export TERMINAL=/home/mihailo/.local/kitty.app/bin/kitty
 
-# Background
+# TODOIST 
+export TODOIST_API_KEY="$(pass Todoist/API)"
+
+# TODO: move to i3 config
+# Wallpaper color
 xsetroot -solid "#111111"
+
+# BoolSi verilate project installation script says we need this
+export CXX=g++
+export SYSTEMC_HOME=/opt/systemc
+export SYSTEMC_INCLUDE=/opt/systemc/include
+export SYSTEMC_LIBDIR=/opt/systemc/lib
+# export VERILATOR_BIN=/home/mihailo/dev/boolsi/verilate/scripts/verilator/bin
+
 
