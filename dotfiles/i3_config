@@ -2,11 +2,10 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
-# set $mod Mod1
 
 
 ####################################################################################################
-# Run at login                                                                            #
+# Run at login                                                                                     #
 ####################################################################################################
 
 # NetworkManager is the most popular way to manage wireless networks on Linux, and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -15,12 +14,7 @@ exec --no-startup-id nm-applet
 exec_always compton
 exec_always hsetroot -solid black
 exec_always /home/mihailo/bin/greenclip daemon
-
-# Polybar with i3-groups workspace names
 exec_always /home/mihailo/bin/polybar.sh
-
-# remove caps lock
-# exec_always sleep 1; source /home/mihailo/.xinitrc; beep
 exec_always --no-startup-id xmodmap .Xmodmap
 exec_always sleep 1; xmodmap -e "keysym Caps_Lock = Escape"; xmodmap -e "clear lock"
 # exec_always bash ~/.xinputrc
@@ -31,38 +25,32 @@ exec_always --no-startup-id rename-workspace -n "shared:1"
 # battery notification
 exec_always --no-startup-id killall i3-battery-popup.sh; i3-battery-popup.sh -L 30 -m "Battery!" -s /usr/share/sounds/freedesktop/stereo/power-unplug.oga -v 70 -n
 
+# Dropbox
+exec --no-startup-id dropbox start
+
+# 10-minute beeper 
+exec --no-startup-id beeper.sh
+
+exec_always ~/.config/i3/scripts/gnome-keyring.sh
+
 # Startup programs
-workspace chrome output DP-4
-workspace obsidian output DP-4
-workspace todo output DP-4
-
 for_window [class="Spotify"] , move scratchpad
-for_window [instance="todoist"] , move scratchpad
-for_window [class="obsidian"] , move scratchpad
-for_window [class="google-chrome"] , move scratchpad
+# for_window [instance="todoist"] , move scratchpad
+# for_window [class="obsidian"] , move scratchpad
+# for_window [class="google-chrome"] , move scratchpad
 
-bindsym $mod+z exec scratchpad.sh spotify
-bindsym $mod+x exec scratchpad.sh todoist
-bindsym $mod+c exec scratchpad.sh google-chrome
-bindsym $mod+v exec scratchpad.sh obsidian
+bindsym $mod+s exec scratchpad.sh spotify
+# bindsym $mod+t exec scratchpad.sh todoist
+# bindsym $mod+c exec scratchpad.sh google-chrome
+# bindsym $mod+o exec scratchpad.sh obsidian
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the screen before suspend. Use loginctl lock-session to lock your screen.
 # exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # screensaver
-# exec --no-startup-id xautolock -time 10 -locker lock
+exec --no-startup-id xautolock -time 10 -locker lock
+exec --no-startup-id xset dpms 600
 
-# not sure what this is -------------------------------------
-# exec --no-startup-id xset dpms 600
-
-# Owncloud / Dropbox
-#exec --no-startup-id ~/tools/owncloud/owncloud.appimage
-exec --no-startup-id dropbox start
-
-exec_always ~/.config/i3/scripts/gnome-keyring.sh
-
-# FRP client
-exec_always killall frpc; frpc -c ~/.config/frp/frpc.ini
 
 ####################################################################################################
 # Run custom commands or applications on key combinations                                          #
@@ -70,13 +58,9 @@ exec_always killall frpc; frpc -c ~/.config/frp/frpc.ini
 
 # start a terminal
 bindsym $mod+Return exec .local/kitty.app/bin/kitty
-#bindsym $mod+Shift+Return exec gnome-terminal
-
-# moved terminal duplicating functionality to kitty, due to reliability issues
-# bindsym $mod+Shift+Return exec clone_term.sh 
 
 # rofi with window, command, dmenu and ssh
-# bindsym $mod+Tab          exec i3-workspace-switcher.sh
+bindsym $mod+Tab          exec i3-workspace-switcher.sh
 bindsym $mod+Shift+Tab    exec rofi -show window -i3 
 bindsym $mod+d            exec rofi -show run    -i3
 bindsym $mod+Shift+d      exec rofi -show drun   -i3
@@ -84,14 +68,15 @@ bindsym $mod+Shift+s      exec rofi -show ssh    -i3 -ssh-command '/home/mihailo
 bindsym $mod+Shift+Ctrl+v exec rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
 
 # Locks i3
-bindsym $mod+x exec lock
+bindsym $mod+x exec lock.sh
 
 # Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% 
+# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% 
+# bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle 
+# bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle 
+bindsym XF86AudioPlay exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% 
+bindsym XF86AudioStop exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% 
 
 # Brightness
 bindsym $mod+F2 exec --no-startup-id sudo brightnessctl --min-value=1 -e set +1%
@@ -123,12 +108,6 @@ bindsym $mod+j focus left
 bindsym $mod+k focus down
 bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+j move left
@@ -163,6 +142,9 @@ for_window [window_role="Preferences"] floating enable
 for_window [window_type="dialog"]      floating enable 
 for_window [window_type="menu"]        floating enable
 
+# specific exceptions
+for_window [class="(?i)google-chrome"]     floating disable
+
 
 ####################################################################################################
 # Floating settings                                                                                #
@@ -178,62 +160,6 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+Shift+minus move scratchpad
 # Show the first scratchpad window
 bindsym $mod+minus scratchpad show
-
-
-####################################################################################################
-# Navigate to shared workspaces (in progress)
-####################################################################################################
-# 
-# # Define names for default workspaces for which we configure key bindings later on.
-# # We use variables to avoid repeating the names in multiple places.
-# set $ws1  "shared:1"
-# set $ws2  "shared:2"
-# set $ws3  "shared:3"
-# set $ws4  "shared:4"
-# set $ws5  "shared:5"
-# set $ws6  "shared:6"
-# set $ws7  "shared:7"
-# set $ws8  "shared:8"
-# set $ws9  "shared:9"
-# set $ws10 "shared:10"
-# 
-# # switch to workspace
-# bindsym $mod+1 workspace number $ws1
-# bindsym $mod+2 workspace number $ws2
-# bindsym $mod+3 workspace number $ws3
-# bindsym $mod+4 workspace number $ws4
-# bindsym $mod+5 workspace number $ws5
-# bindsym $mod+6 workspace number $ws6
-# bindsym $mod+7 workspace number $ws7
-# bindsym $mod+8 workspace number $ws8
-# bindsym $mod+9 workspace number $ws9
-# bindsym $mod+0 workspace number $ws10
-# 
-# # move focused container to workspace
-# bindsym $mod+Shift+1 move container to workspace number $ws1
-# bindsym $mod+Shift+2 move container to workspace number $ws2
-# bindsym $mod+Shift+3 move container to workspace number $ws3
-# bindsym $mod+Shift+4 move container to workspace number $ws4
-# bindsym $mod+Shift+5 move container to workspace number $ws5
-# bindsym $mod+Shift+6 move container to workspace number $ws6
-# bindsym $mod+Shift+7 move container to workspace number $ws7
-# bindsym $mod+Shift+8 move container to workspace number $ws8
-# bindsym $mod+Shift+9 move container to workspace number $ws9
-# bindsym $mod+Shift+0 move container to workspace number $ws10
-
-# Fn keys listing 
-#  KEYBOARD_KEY_a0=!mute
-#  KEYBOARD_KEY_ae=!volumedown
-#  KEYBOARD_KEY_b0=!volumeup
-#  KEYBOARD_KEY_90=!previoussong
-#  KEYBOARD_KEY_a2=!playpause
-#  KEYBOARD_KEY_99=!nextsong
-#  KEYBOARD_KEY_b7=!sysrq
-#  KEYBOARD_KEY_c7=!home
-#  KEYBOARD_KEY_cf=!end
-#  KEYBOARD_KEY_d1=!pagedown
-#  KEYBOARD_KEY_c9=!pageup
-#  KEYBOARD_KEY_ed=!media
 
 
 ####################################################################################################
@@ -262,8 +188,6 @@ bindsym $mod+Shift+g exec move-ws-to-group
 bindsym $mod+Shift+w exec make-workspace
 #bindsym $mod+Shift+f exec ~/libs/rofi-file-selector/rofi-file-selector.sh
 bindsym $mod+v       exec rofi-virtualbox.sh
-#bindsym $mod+a       exec goto-shared-ws --key browser
-#bindsym $mod+s       exec goto-shared-ws --key roam
 
 
 ####################################################################################################
@@ -278,11 +202,11 @@ font pango:monospace 11
 # window border
 # for_window [class="^.*"] border pixel 10 20 30 40
 for_window [class="^.*"] border pixel 0 0 0 0
-# hide_edge_borders both
+hide_edge_borders both
 
 # popups
-popup_during_fullscreen smart
-
+# popup_during_fullscreen smart|ignore|leave_fullscreen
+popup_during_fullscreen leave_fullscreen
 
 # class			        border  backgr. text    indicator
 client.focused          #333333 #F0C674 #000000 #F0C674
