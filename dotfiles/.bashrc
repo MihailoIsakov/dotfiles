@@ -24,13 +24,6 @@ PYTHONPYCACHEPREFIX="."
 if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
 # END_KITTY_SHELL_INTEGRATION
 
-# BoolSi verilate project installation script says we need this
-export CXX="g++"
-export SYSTEMC_HOME="/opt/systemc"
-export SYSTEMC_INCLUDE="${SYSTEMC_HOME}/include"
-export SYSTEMC_LIBDIR="${SYSTEMC_HOME}/lib"
-export VERILATOR_BIN="${dir_tools}/verilator/bin"
-
 ####################################################################################################
 # Colors and UX                                                                                    # 
 ####################################################################################################
@@ -40,7 +33,7 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # color the cursor for better visibility
-echo -ne '\e]12;orange\a'
+# echo -ne '\e]12;orange\a'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -71,7 +64,7 @@ HISTFILESIZE=100000
 # append to the history file, don't overwrite it
 shopt -s histappend
 # After each command, append to the history file and reread it
-# PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
 # check the window size after each command and, if necessary, update the values of LINES and COLUMNS.
 shopt -s checkwinsize
@@ -81,7 +74,7 @@ shopt -s checkwinsize
 #shopt -s globstar
 
 # Jump (https://github.com/gsamokovarov/jump) shell integration
-# eval "$(jump shell)"
+eval "$(jump shell)"
 
 # ssh agent 
 if [ -f ~/.ssh/agent.env ] ; then
@@ -119,7 +112,14 @@ bind 'set match-hidden-files off'
 # source ~/bin/git-completion.bash
 
 # Fuzzy search autocompletion and terminal key bindings
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# Second attempt at FZF
+# source ~/bin/fzf-bash-completion.sh
+# bind -x '"\t": fzf_bash_completion'
+
+# github copilot CLI
+eval "$(github-copilot-cli alias -- "$0")"
 
 ######################
 # Powerline-go shell #
@@ -127,7 +127,7 @@ bind 'set match-hidden-files off'
 function _update_ps1() {
     #PS1="$(/home/mihailo/bin/powerline-go -error $? -jobs $(jobs -p | wc -l))"
     #PS1=$(/home/mihailo/bin/powerline-go -error $? -cwd-max-depth 10 -modules="time,ssh,venv,cwd,git,newline" -theme "gruvbox" )
-    PS1=$(/home/mihailo/bin/powerline-go -error $? -cwd-max-depth 1 -modules="time,ssh,venv,cwd,git,newline" -theme "gruvbox" )
+    PS1=$(/home/mihailo/bin/powerline-go -error $? -cwd-max-depth 4 -modules="time,ssh,venv,cwd,git,newline" -theme "gruvbox" )
 
     # Uncomment the following line to automatically clear errors after showing
     # them once. This not only clears the error for powerline-go, but also for
@@ -140,5 +140,4 @@ function _update_ps1() {
 if [ "$TERM" != "linux" ] && [ -f "/home/mihailo/bin/powerline-go" ]; then
     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 fi
-
 
