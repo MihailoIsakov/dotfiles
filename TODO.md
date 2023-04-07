@@ -4,6 +4,7 @@
 - [ ] Add Obsidian to install.sh
 - [ ] Add Plover to install.sh
 - [ ] Add cscope? 
+- [ ] Add pass?
 
 ## Keyboard:
 - [ ] Build wireless keyboard 
