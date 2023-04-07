@@ -52,14 +52,26 @@ require('packer').startup(function(use)
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
-  use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+  -- use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
 
   use {
     'norcalli/nvim-colorizer.lua'
   }
 
   -- Fuzzy Finder (files, lsp, etc)
-  use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
+  -- use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
+
+  -- Ignore case in telescope
+  use {
+    "nvim-telescope/telescope.nvim",
+    requires = {
+      { 'nvim-lua/plenary.nvim',
+        "nvim-telescope/telescope-live-grep-args.nvim" },
+    },
+    config = function()
+      require("telescope").load_extension("live_grep_args")
+    end
+  }
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
@@ -71,6 +83,8 @@ require('packer').startup(function(use)
 
   use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
 
+  use {"jbyuki/venn.nvim"}
+
   use {
     "folke/todo-comments.nvim",
     requires = "nvim-lua/plenary.nvim",
@@ -81,10 +95,104 @@ require('packer').startup(function(use)
         -- refer to the configuration section below
         highlight = {
             comments_only = false,
-        }
+            keyword = "bg"
+        },
+
+        colors = {
+            error     =   {"DiagnosticError", "ErrorMsg",   "#DC2626"},
+            warning   =   {"DiagnosticWarn",  "WarningMsg", "#FB8524"},
+            info      =   {"DiagnosticInfo",                "#2563EB"},
+            hint      =   {"DiagnosticHint",                "#10B981"},
+            default   =   {"Identifier",                    "#7C3AED"},
+            test      =   {"Identifier",                    "#FF00FF"},
+            green     =   {"Good",                          "#478f4d"},
+        },
+
+        merge_keywords = true,
+
+        -- For some reason, these are not used? 
+        keywords = {
+            TODO =  { icon = "", color = "info" },
+            HACK =  { icon = "", color = "warning", alt = { "FIXME", "BUG", "FIX", "TEMP"} },
+            ERROR = { icon = "", color = "error" },
+            WARN =  { icon = "", color = "warning", alt = { "WARNING", "XXX" } },
+            PERF =  { icon = "", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+            NOTE =  { icon = " ", color = "hint", alt = { "INFO" } },
+            IDEA =  { icon = " ", color = "green"},
+            TEST =  { icon = "⏲", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+        },
+        -- ERROR: test
+        -- TODO: test
+        -- HACK: test
+        -- WARN: test
+        -- FIXME: test
+        -- PERF: test
+        -- NOTE: test
+        -- TEST: test
       }
     end
   }
+
+    -- use {'preservim/vim-markdown'}
+  use {'~/libs/vim-markdown/'}
+  -- use {'epwalsh/obsidian.nvim'}
+  use {'~/libs/obsidian.nvim'}
+
+  use {
+    "folke/which-key.nvim",
+    config = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+      require("which-key").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
+
+  use {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({
+        suggestion = {
+          enabled = true,
+          auto_trigger = true,
+        }
+      })
+    end
+  }
+
+  -- use {
+  --   "zbirenbaum/copilot-cmp",
+  --   after = { "copilot.lua" },
+  --   config = function ()
+  --     require("copilot_cmp").setup({
+  --       suggestion = { enabled = false },
+  --       panel = { enabled = false },
+  --     })
+  --   end
+  -- }
+
+  -- use{ 'anuvyklack/pretty-fold.nvim',
+  --   config = function()
+  --     require('pretty-fold').setup()
+  --     -- require('pretty-fold').setup {
+  --     --   custom_function_arg = '\n',
+  --     --   sections = {
+  --     --     left = {
+  --     --       function(config)
+  --     --         return config.custom_function_arg
+  --     --       end
+  --     --     },
+  --     --   }
+  --     -- }
+  --   end
+  -- }
+
+  use { "romgrk/todoist.nvim" }
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
@@ -165,8 +273,6 @@ vim.o.completeopt = 'menuone,noselect'
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-
-vim.g.markdown_folding=1
 
 
 -- Keymaps for better default experience
@@ -406,6 +512,44 @@ require('ufo').setup({
   fold_virt_text_handler = handler
 })
 
+require("obsidian").setup({
+  dir = "~/Dropbox/Obsidian",
+  completion = {
+    nvim_cmp = true, -- if using nvim-cmp, otherwise set to false
+  },
+  templates = {
+      subdir = "templates",
+      date_format = "%Y-%m-%d",
+      time_format = "%H:%M"
+  },
+  note_id_func = function(title)
+    -- Create note IDs in a Zettelkasten format with a timestamp and a suffix.
+    local suffix = ""
+    if title ~= nil then
+      -- If title is given, transform it into valid file name.
+      suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", "")
+    else
+      -- If title is nil, just add 4 random uppercase letters to the suffix.
+      for _ = 1, 4 do
+        suffix = suffix .. string.char(math.random(65, 90))
+      end
+    end
+    -- return tostring(os.time()) .. "-" .. suffix
+    return suffix
+  end
+})
+
+require("nvim-treesitter.configs").setup({
+  ensure_installed = { "markdown", "markdown_inline", ... },
+  highlight = {
+    enable = true,
+    disable = { "markdown" },
+    additional_vim_regex_highlighting = { "markdown" },
+    indent = {
+        enable = true
+    },
+  },
+})
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
@@ -416,7 +560,7 @@ vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { d
 vim.keymap.set('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-    winblend = 10,
+   winblend = 10,
     previewer = false,
   })
 end, { desc = '[/] Fuzzily search in current buffer]' })
@@ -424,7 +568,9 @@ end, { desc = '[/] Fuzzily search in current buffer]' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
+--vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
+
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
 -- [[ Configure Treesitter ]]
@@ -592,48 +738,47 @@ mason_lspconfig.setup_handlers {
 require('fidget').setup()
 
 -- nvim-cmp setup
--- local cmp = require 'cmp'
--- local luasnip = require 'luasnip'
--- 
--- cmp.setup {
---   snippet = {
---     expand = function(args)
---       luasnip.lsp_expand(args.body)
---     end,
---   },
---   mapping = cmp.mapping.preset.insert {
---     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
---     ['<C-f>'] = cmp.mapping.scroll_docs(4),
---     ['<C-Space>'] = cmp.mapping.complete(),
---     ['<CR>'] = cmp.mapping.confirm {
---       behavior = cmp.ConfirmBehavior.Insert,
---       select = true,
---     },
---     ['<Tab>'] = cmp.mapping(function(fallback)
---       if cmp.visible() then
---         cmp.select_next_item()
---       elseif luasnip.expand_or_jumpable() then
---         luasnip.expand_or_jump()
---       else
---         fallback()
---       end
---     end, { 'i', 's' }),
---     ['<S-Tab>'] = cmp.mapping(function(fallback)
---       if cmp.visible() then
---         cmp.select_prev_item()
---       elseif luasnip.jumpable(-1) then
---         luasnip.jump(-1)
---       else
---         fallback()
---       end
---     end, { 'i', 's' }),
---   },
---   sources = {
---     { name = 'nvim_lsp' },
---     { name = 'luasnip' },
---   },
--- }
+local cmp = require 'cmp'
+local luasnip = require 'luasnip'
 
+cmp.setup {
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
+  },
+  mapping = cmp.mapping.preset.insert {
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<CR>'] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Insert,
+      select = true,
+    },
+    ['<Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+  },
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+  },
+}
 
 -- Converting old .vimrc
 vim.api.nvim_set_keymap("n", "<C-f>", "*", {noremap = true})
@@ -670,7 +815,11 @@ vim.api.nvim_set_keymap("n", "<C-p>", ":bp<CR>", {})
 -- vim.keymap.set('n', 'j', "gj", { expr = true, silent = true })
 -- Set default tab width to 4
 vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
+vim.g.tabstop = 4
+vim.o.tabstop = 4
+-- vim.opt.shiftwidth = 4
+-- vim.g.shiftwidth = 4 
+-- vim.o.shiftwidth = 4
 vim.opt.expandtab = true
 -- Set nowrap
 vim.opt.wrap = false
@@ -699,6 +848,9 @@ vim.opt.updatetime = 300
 -- Always show the signcolumn, otherwise it would shift the text each time
 -- diagnostics appeared/became resolved
 vim.opt.signcolumn = "yes"
+
+-- When autocompleting commands, autocomplete till the longest common string and show a list of options
+vim.opt.wildmode = "list:longest"
 
 local keyset = vim.keymap.set
 -- Autocomplete
