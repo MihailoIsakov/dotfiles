@@ -133,10 +133,10 @@ require('packer').startup(function(use)
     end
   }
 
-    -- use {'preservim/vim-markdown'}
-  use {'~/libs/vim-markdown/'}
-  -- use {'epwalsh/obsidian.nvim'}
-  use {'~/libs/obsidian.nvim'}
+  use {'preservim/vim-markdown'}
+  -- use {'~/libs/vim-markdown/'}
+  use {'epwalsh/obsidian.nvim'}
+  -- use {'~/libs/obsidian.nvim'}
 
   use {
     "folke/which-key.nvim",
@@ -513,7 +513,7 @@ require('ufo').setup({
 })
 
 require("obsidian").setup({
-  dir = "~/Dropbox/Obsidian",
+  dir = "~/Dropbox/BoolSi/obsidian/",
   completion = {
     nvim_cmp = true, -- if using nvim-cmp, otherwise set to false
   },
