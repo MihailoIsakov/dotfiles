@@ -13,8 +13,10 @@ alias cl='printf "\033c"'
 # ls stuff
 alias sl='ls'
 alias ls='ls -t --group-directories-first --color'
+alias la='ls -a'
 alias ll='ls -latrh'
-alias ld='ls -la | grep "^d" && ls -la | grep "^-" && ls -la | grep "^l"'
+# alias ld='ls -la | grep "^d" && ls -la | grep "^-" && ls -la | grep "^l"'
+alias ld='ls -la | grep "^d"'
 
 # Clone terminal
 alias cl='clone_term.sh'
@@ -41,6 +43,9 @@ alias pull='git pull'
 alias gtc='git show --name-only'
 alias push='git push'
 alias amend='git commit --amend'
+
+# rg follow symlinks
+alias rg='rg -L'
 
 # language specific tools
 alias ipy='ipython'
@@ -69,3 +74,11 @@ alias gtkwave="gtkwave --rcvar 'fontname_signals Firacode 16' --rcvar 'fontname_
 # zathura
 alias zs="swallow zathura"  
 
+# github CLI
+feature() {
+        gh issue create --title "$*" --body "" --label "enhancement"
+}
+
+bug() {
+        gh issue create --title "$*" --body "" --label "bug"
+}
