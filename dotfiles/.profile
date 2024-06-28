@@ -56,9 +56,6 @@ export WORKON_HOME=$HOME/.virtualenvs
 export TERM=/home/mihailo/.local/kitty.app/bin/kitty
 export TERMINAL=/home/mihailo/.local/kitty.app/bin/kitty
 
-# TODOIST 
-export TODOIST_API_KEY="$(pass Todoist/API)"
-
 # TODO: move to i3 config
 # Wallpaper color
 xsetroot -solid "#111111"
