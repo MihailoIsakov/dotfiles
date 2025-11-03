@@ -1,0 +1,56 @@
+#!/bin/bash
+
+set -e
+
+BRANCH_NAME="$1"
+
+if [ -z "$BRANCH_NAME" ]; then
+    read -p "Enter branch name: " BRANCH_NAME
+fi
+
+if [ -z "$BRANCH_NAME" ]; then
+    echo "Error: Branch name cannot be empty"
+    exit 1
+fi
+
+# if git rev-parse --verify "$BRANCH_NAME" &>/dev/null; then
+#     echo "Error: Branch '$BRANCH_NAME' already exists"
+#     exit 1
+# fi
+
+echo "Creating branch '$BRANCH_NAME'..."
+git checkout -b "$BRANCH_NAME"
+
+echo "Creating empty commit..."
+git commit --allow-empty -m "Initial commit for $BRANCH_NAME"
+
+echo "Pushing branch to remote..."
+git push -u origin "$BRANCH_NAME" --force
+
+echo "Switching back to main branch..."
+git checkout -
+
+echo "Creating draft PR..."
+PR_URL=$(gh pr create --draft --head "$BRANCH_NAME" --title "$BRANCH_NAME" --body "")
+
+PR_NUMBER=$(echo "$PR_URL" | grep -oP '/pull/\K\d+')
+
+if [ -z "$PR_NUMBER" ]; then
+    echo "Error: Failed to extract PR number from: $PR_URL"
+    exit 1
+fi
+
+REPO_NAME=$(basename "$(git rev-parse --show-toplevel)")
+
+SANITIZED_BRANCH=$(echo "$BRANCH_NAME" | sed 's/\//-/g')
+
+WORKTREE_DIR="../${REPO_NAME}_PR${PR_NUMBER}_${SANITIZED_BRANCH}"
+
+echo "Creating worktree at $WORKTREE_DIR..."
+git worktree add "$WORKTREE_DIR" "$BRANCH_NAME"
+
+echo ""
+echo "✓ Done! PR created: $PR_URL"
+echo "✓ Worktree created at: $WORKTREE_DIR"
+echo ""
+echo "Run: cd $WORKTREE_DIR"
