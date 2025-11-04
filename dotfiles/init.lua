@@ -50,8 +50,8 @@ require('packer').startup(function(use)
 
   use 'navarasu/onedark.nvim' -- Theme inspired by Atom
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
-  use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
+  use 'lukas-reineke/indent-blankline.nvim'
   -- use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
 
   use {
@@ -110,33 +110,35 @@ require('packer').startup(function(use)
 
         merge_keywords = true,
 
-        -- For some reason, these are not used? 
+        -- For some reason, these are not used?  📝🎇  ⏲
         keywords = {
-            TODO =  { icon = "", color = "info" },
-            HACK =  { icon = "", color = "warning", alt = { "FIXME", "BUG", "FIX", "TEMP"} },
-            ERROR = { icon = "", color = "error" },
-            WARN =  { icon = "", color = "warning", alt = { "WARNING", "XXX" } },
-            PERF =  { icon = "", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
-            NOTE =  { icon = " ", color = "hint", alt = { "INFO" } },
-            IDEA =  { icon = " ", color = "green"},
-            TEST =  { icon = "⏲", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+            TODO =  { icon = "", color = "info" },
+            FIXME = { icon = "󰈸", color = "error" },
+            BUG   = { icon = "󰈸", color = "error" },
+            FIX   = { icon = "󰈸", color = "error" },
+            ERROR = { icon = "", color = "error" },
+            WARN =  { icon = "󰗖", color = "warning", alt = { "WARNING", "XXX" } },
+            HACK =  { icon = "󰂓", color = "error" },
+            TEST =  { icon = "󰂓", color = "test", alt = { "TESTING", "PASSED", "FAILED" } },
+            PERF =  { icon = "󰈸", color="warning", alt = { "OPTIM", "PERFORMANCE", "OPTIMIZE" } },
+            NOTE =  { icon = "🗒", color = "green", alt = { "INFO" } },
+            IDEA =  { icon = "", color = "green"},
         },
-        -- ERROR: test
         -- TODO: test
+        -- ERROR: test
+        -- HACK: test
+        -- TEST: test
+        -- FIXME: test
         -- HACK: test
         -- WARN: test
-        -- FIXME: test
         -- PERF: test
         -- NOTE: test
-        -- TEST: test
       }
     end
   }
 
-    -- use {'preservim/vim-markdown'}
-  use {'~/libs/vim-markdown/'}
-  -- use {'epwalsh/obsidian.nvim'}
-  use {'~/libs/obsidian.nvim'}
+  use {'preservim/vim-markdown'}
+  -- use {'~/libs/vim-markdown/'}
 
   use {
     "folke/which-key.nvim",
@@ -160,21 +162,22 @@ require('packer').startup(function(use)
         suggestion = {
           enabled = true,
           auto_trigger = true,
+          debounce = 75,
+          keymap = {
+            accept = "<C-CR>",
+            -- accept_word = false,
+            -- accept_line = false,
+            next = "<C-]>",
+            -- prev = "<C-[>",
+            -- dismiss = "<C-]>",
+          },
+        },
+        panel = {
+          enabled = false,
         }
       })
     end
   }
-
-  -- use {
-  --   "zbirenbaum/copilot-cmp",
-  --   after = { "copilot.lua" },
-  --   config = function ()
-  --     require("copilot_cmp").setup({
-  --       suggestion = { enabled = false },
-  --       panel = { enabled = false },
-  --     })
-  --   end
-  -- }
 
   -- use{ 'anuvyklack/pretty-fold.nvim',
   --   config = function()
@@ -227,8 +230,18 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   pattern = vim.fn.expand '$MYVIMRC',
 })
 
+-- Automatically reload LSP servers when saving a file 
+vim.api.nvim_create_autocmd('BufWritePost', {
+  command = 'LspRestart',
+})
+
 -- [[ Setting options ]]
 -- See `:help vim.o`
+
+-- Disable the vim version of Copilot completely (using copilot.lua instead)
+vim.g.copilot_no_tab_map = true
+vim.g.copilot_enabled = false  -- Added by Claude
+vim.g.copilot_no_maps = true  -- Added by Claude
 
 -- Set highlight on search
 vim.o.hlsearch = true
@@ -250,9 +263,7 @@ vim.o.undofile = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
--- Decrease update time
-vim.o.updatetime = 250
-vim.wo.signcolumn = 'yes'
+-- vim.wo.signcolumn = 'yes'
 
 -- Set colorscheme
 vim.o.termguicolors = true
@@ -351,7 +362,7 @@ require('lualine').setup {
   sections = {
     lualine_a = { 'mode' },
     lualine_b = {
-      'branch',
+      -- 'branch',
       {
         "diff",
         diff_color = {
@@ -441,15 +452,10 @@ require('lualine').setup {
   }
 }
 
+require("ibl").setup()
+
 -- Enable Comment.nvim
 require('Comment').setup()
-
--- Enable `lukas-reineke/indent-blankline.nvim`
--- See `:help indent_blankline.txt`
-require('indent_blankline').setup {
-  char = '┊',
-  show_trailing_blankline_indent = false,
-}
 
 -- Gitsigns
 -- See `:help gitsigns.txt`
@@ -460,6 +466,12 @@ require('gitsigns').setup {
     delete = { text = '_' },
     topdelete = { text = '‾' },
     changedelete = { text = '~' },
+  },
+  current_line_blame = true,
+  current_line_blame_opts = {
+    virt_text = true,
+    virt_text_pos = 'eol',
+    delay = 300,
   },
 }
 
@@ -512,33 +524,6 @@ require('ufo').setup({
   fold_virt_text_handler = handler
 })
 
-require("obsidian").setup({
-  dir = "~/Dropbox/Obsidian",
-  completion = {
-    nvim_cmp = true, -- if using nvim-cmp, otherwise set to false
-  },
-  templates = {
-      subdir = "templates",
-      date_format = "%Y-%m-%d",
-      time_format = "%H:%M"
-  },
-  note_id_func = function(title)
-    -- Create note IDs in a Zettelkasten format with a timestamp and a suffix.
-    local suffix = ""
-    if title ~= nil then
-      -- If title is given, transform it into valid file name.
-      suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", "")
-    else
-      -- If title is nil, just add 4 random uppercase letters to the suffix.
-      for _ = 1, 4 do
-        suffix = suffix .. string.char(math.random(65, 90))
-      end
-    end
-    -- return tostring(os.time()) .. "-" .. suffix
-    return suffix
-  end
-})
-
 require("nvim-treesitter.configs").setup({
   ensure_installed = { "markdown", "markdown_inline", ... },
   highlight = {
@@ -546,7 +531,7 @@ require("nvim-treesitter.configs").setup({
     disable = { "markdown" },
     additional_vim_regex_highlighting = { "markdown" },
     indent = {
-        enable = true
+        enable = false
     },
   },
 })
@@ -577,7 +562,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'vim' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'vim' },
 
   highlight = { enable = true },
   indent = { enable = true, disable = { 'python' } },
@@ -675,11 +660,6 @@ local on_attach = function(_, bufnr)
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-  nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-  nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-  nmap('<leader>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, '[W]orkspace [L]ist Folders')
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
@@ -693,9 +673,9 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-  -- clangd = {},
+  clangd = {},
   -- gopls = {},
-  pyright = {},
+  -- basedpyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
 
@@ -724,15 +704,58 @@ mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
 }
 
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = servers[server_name],
-    }
-  end,
-}
+-- Mihailo, 2025-05-20: disabling due to some breaking change:
+-- https://github.com/mason-org/mason-lspconfig.nvim/issues/545
+-- https://github.com/ganiulis/dotfiles/commit/4721c811e2d6ba0ce336172f7cda79802c256125
+-- mason_lspconfig.setup_handlers {
+--   function(server_name)
+--     require('lspconfig')[server_name].setup {
+--       capabilities = capabilities,
+--       on_attach = on_attach,
+--       settings = servers[server_name],
+--     }
+--   end,
+-- }
+
+-- Get list of all installed servers from Mason
+local installed_servers = require("mason-lspconfig").get_installed_servers()
+
+-- Filter out pyright from automatic setup since we configure it manually below
+local filtered_servers = {}
+for _, server_name in ipairs(installed_servers) do
+  if server_name ~= "pyright" then
+    table.insert(filtered_servers, server_name)
+  end
+end
+
+-- Modified on_attach that doesn't override hover functionality
+local lsp_on_attach = function(client, bufnr)
+  -- Disable hover handler from native LSP since we're using coc.nvim
+  client.server_capabilities.hoverProvider = false
+  
+  -- Run the original on_attach without conflicting with coc
+  on_attach(client, bufnr)
+end
+
+-- Set up all installed servers with hover disabled to avoid conflicts with coc.nvim
+for _, server_name in ipairs(filtered_servers) do
+  local server_opts = servers[server_name] or {}
+  require('lspconfig')[server_name].setup {
+    capabilities = capabilities,
+    on_attach = lsp_on_attach,
+    settings = server_opts,
+  }
+end
+
+
+-- require('lspconfig').ruff.setup({
+--   init_options = {
+--     settings = {
+--       -- Ruff language server settings go here
+--     }
+--   }
+-- })
+
 
 -- Turn on lsp status information
 require('fidget').setup()
@@ -814,6 +837,7 @@ vim.api.nvim_set_keymap("n", "<C-p>", ":bp<CR>", {})
 -- vim.keymap.set('n', 'k', "gk", { expr = true, silent = true })
 -- vim.keymap.set('n', 'j', "gj", { expr = true, silent = true })
 -- Set default tab width to 4
+vim.opt.sw = 4
 vim.opt.tabstop = 4
 vim.g.tabstop = 4
 vim.o.tabstop = 4
@@ -827,7 +851,7 @@ vim.opt.wrap = false
 vim.opt.foldmethod="expr"
 vim.opt.foldexpr="nvim_treesitter#foldexpr()"
 
-vim.o.foldcolumn = '1' -- '0' is not bad
+vim.o.foldcolumn = '0'
 vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
@@ -843,11 +867,14 @@ vim.opt.writebackup = false
 
 -- Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
 -- delays and poor user experience
-vim.opt.updatetime = 300
+vim.opt.updatetime = 250
+-- Decrease update time
+vim.o.updatetime = 250
 
 -- Always show the signcolumn, otherwise it would shift the text each time
 -- diagnostics appeared/became resolved
-vim.opt.signcolumn = "yes"
+vim.wo.signcolumn = 'number' -- more secure
+vim.opt.signcolumn = "number"
 
 -- When autocompleting commands, autocomplete till the longest common string and show a list of options
 vim.opt.wildmode = "list:longest"
@@ -1005,6 +1032,11 @@ vim.api.nvim_create_user_command("OR", "call CocActionAsync('runCommand', 'edito
 -- NOTE: Please see `:h coc-status` for integrations with external plugins that
 -- provide custom statusline: lightline.vim, vim-airline
 vim.opt.statusline:prepend("%{coc#status()}%{get(b:,'coc_current_function','')}")
+
+vim.diagnostic.config({
+    -- virtual_lines = true,
+    virtual_text = true,
+})
 
 -- Mappings for CoCList
 -- code actions and coc stuff
