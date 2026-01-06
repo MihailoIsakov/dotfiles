@@ -140,6 +140,44 @@ require('packer').startup(function(use)
   use {'preservim/vim-markdown'}
   -- use {'~/libs/vim-markdown/'}
 
+  use({
+      'MeanderingProgrammer/render-markdown.nvim',
+      after = { 'nvim-treesitter' },
+      requires = { 'nvim-mini/mini.nvim', opt = true },            -- if you use the mini.nvim suite
+      -- requires = { 'nvim-mini/mini.icons', opt = true },        -- if you use standalone mini plugins
+      -- requires = { 'nvim-tree/nvim-web-devicons', opt = true }, -- if you prefer nvim-web-devicons
+      config = function()
+          require('render-markdown').setup({
+              heading = {
+                  enabled = true,
+                  icons = { '󰲡 ', '󰲣 ', '󰲥 ', '󰲧 ', '󰲩 ', '󰲫 ' },
+                  position = 'overlay',
+                  width = 'full',
+                  border = true,
+                  left_pad = { 2, 1, 1, 1, 0, 0 },
+                  right_pad = { 2, 1, 1, 1, 0, 0 },
+                  min_width = 40,
+                  backgrounds = {
+                      'RenderMarkdownH1Bg',
+                      'RenderMarkdownH2Bg',
+                      'RenderMarkdownH3Bg',
+                      'RenderMarkdownH4Bg',
+                      'RenderMarkdownH5Bg',
+                      'RenderMarkdownH6Bg',
+                  },
+                  foregrounds = {
+                      'RenderMarkdownH1',
+                      'RenderMarkdownH2',
+                      'RenderMarkdownH3',
+                      'RenderMarkdownH4',
+                      'RenderMarkdownH5',
+                      'RenderMarkdownH6',
+                  },
+              },
+          })
+      end,
+  })
+
   use {
     "folke/which-key.nvim",
     config = function()
@@ -153,31 +191,7 @@ require('packer').startup(function(use)
     end
   }
 
-  use {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function()
-      require("copilot").setup({
-        suggestion = {
-          enabled = true,
-          auto_trigger = true,
-          debounce = 75,
-          keymap = {
-            accept = "<C-CR>",
-            -- accept_word = false,
-            -- accept_line = false,
-            next = "<C-]>",
-            -- prev = "<C-[>",
-            -- dismiss = "<C-]>",
-          },
-        },
-        panel = {
-          enabled = false,
-        }
-      })
-    end
-  }
+  use {'github/copilot.vim', branch = 'release'}
 
   -- use{ 'anuvyklack/pretty-fold.nvim',
   --   config = function()
@@ -235,13 +249,24 @@ vim.api.nvim_create_autocmd('BufWritePost', {
   command = 'LspRestart',
 })
 
+-- Set textwidth for .tex files
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'tex',
+  callback = function()
+    vim.opt_local.textwidth = 120
+  end,
+})
+
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
--- Disable the vim version of Copilot completely (using copilot.lua instead)
+-- Copilot keybindings
 vim.g.copilot_no_tab_map = true
-vim.g.copilot_enabled = false  -- Added by Claude
-vim.g.copilot_no_maps = true  -- Added by Claude
+vim.g.copilot_assume_mapped = true
+vim.keymap.set('i', '<C-CR>', 'copilot#Accept("\\<CR>")', {
+  expr = true,
+  replace_keycodes = false
+})
 
 -- Set highlight on search
 vim.o.hlsearch = true
@@ -274,6 +299,9 @@ vim.opt.clipboard = 'unnamedplus'
 
 -- Add cursor line
 vim.o.cursorline = true
+
+-- Add vertical highlight at 120th character
+vim.opt.colorcolumn = "120"
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
@@ -740,11 +768,12 @@ end
 -- Set up all installed servers with hover disabled to avoid conflicts with coc.nvim
 for _, server_name in ipairs(filtered_servers) do
   local server_opts = servers[server_name] or {}
-  require('lspconfig')[server_name].setup {
+  vim.lsp.config[server_name] = {
     capabilities = capabilities,
     on_attach = lsp_on_attach,
     settings = server_opts,
   }
+  vim.lsp.enable(server_name)
 end
 
 
