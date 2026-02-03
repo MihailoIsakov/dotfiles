@@ -16,16 +16,12 @@ enable_audio_bell no
 # italic_font      auto
 # bold_italic_font auto
 
-# Needed for `kitty @ ls` used in the dropdown terminal
-allow_remote_control yes
-listen_on unix:/tmp/kitty-socket
-
 font_size 15.0
 
 font_features FiraCode-Regular +ss01 +ss02 +ss03 +ss04 +ss05 +ss07 +ss08 +zero +cv32 +cv26 +cv24 +cv31 +cv02 +cv30
 
-# clone terminal
-map cmd+shift+enter launch --cwd=current --copy-env --type=os-window 
+# clone terminal (hiding from claude temporarily by adding extra letters
+map cmd+shiftx+enter launch --cwd=current --copy-env --type=os-window 
 
 # individual font size 
 map ctrl+shift+k change_font_size current +1.0
@@ -76,4 +72,3 @@ bold_font        auto
 italic_font      auto
 bold_italic_font auto
 # END_KITTY_FONTS
-map shift+enter send_text all \e\r

@@ -4,9 +4,14 @@ export PATH="$PATH:/usr/bin"
 export PATH="$PATH:/usr/sbin"
 export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:/usr/local/sbin"
+export PATH="$PATH:/snap/bin"
 
 export PATH="$PATH:/home/mihailo/bin"
 export PATH="$PATH:/home/mihailo/.local/bin"
 export PATH="$PATH:/home/mihailo/.local/kitty.app/bin"
 export PATH="$PATH:/home/mihailo/snap/bin"
 export PATH="$PATH:/opt/nvim-linux64/bin"
+
+export PATH="$PATH:/opt/Xilinx/Vitis/2024.2/bin"
+
+

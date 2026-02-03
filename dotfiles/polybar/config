@@ -33,9 +33,10 @@ disabled       = #707880
 [bar/main]
 monitor = ${env:MONITOR:}
 
-modules-left = workspace_groups
+; modules-left = workspace_groups
+modules-left = i3
 ; modules-right = spotify pulseaudio battery cpu memory date
-modules-right = pulseaudio battery cpu memory date
+modules-right = pulseaudio cpu memory date
 
 width = 100%
 height = 24pt
@@ -76,6 +77,18 @@ enable-ipc = true
 ; Modules
 ;==========================================================
 
+[module/i3]
+type = internal/i3
+show-urgent = true
+pin-workspaces = true
+index-sort = true
+label-focused-padding = 3 
+label-unfocused-padding = 3
+
+; label-focused = %index%
+label-focused-foreground = #1e1e1e
+label-focused-background = #ffbb55
+label-focused-underline = #fba922
 
 [module/workspace_groups]
 type = custom/script

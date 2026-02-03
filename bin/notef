@@ -1,5 +1,0 @@
-#! /bin/bash 
-
-cd ~/Dropbox/BoolSi/obsidian
-
-nvim +:ObsidianQuickSwitch

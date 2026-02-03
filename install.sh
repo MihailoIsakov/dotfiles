@@ -1,5 +1,11 @@
 #! /bin/bash
 
+#
+# TODO: request GitHub permissions first!
+# TODO: use the setup_ssh.sh script
+#
+
+
 # exit if any command fails
 set -e 
 
@@ -14,13 +20,14 @@ mkdir -p ~/libs/
 ################################################
 # bare necessities, possibly tied into configs #
 ################################################
-sudo apt install -y vim-gtk bash-completion mosh wget curl htop python3.10 python3-pip python3.10-venv 
+sudo apt install -y neovim bash-completion mosh wget curl htop python3.11 python3-pip python3.11-venv ripgrep
 
 # FZF Fuzzy search
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
 
 git config --global user.email "isakov.m@gmail.com"
 git config --global user.name  "Mihailo Isakov"
+git config --global core.editor "nvim"
 git config pull.rebase false  # merge strategy
 
 ###########################
@@ -80,11 +87,11 @@ if [[ $REPLY =~ ^[Yy]$ ]]
 then
     echo "\n"
     # NVIDIA driver
-    read -p "Install NVIDIA driver: nvidia-driver-515 ? " -n 1 -r
+    read -p "Install NVIDIA driver: nvidia-driver-550 ? " -n 1 -r
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
 	echo "\n"
-	sudo apt install -y nvidia-driver-515
+	sudo apt install -y nvidia-driver-550
     fi
 
     # environment, terminal
@@ -92,10 +99,10 @@ then
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
 
     # Use pipx or virtualenvwrapper whenever possible
-    pip install virtualenv virtualenvwrapper pipx
+    pip install virtualenv virtualenvwrapper pipx i3-swallow
 
     # virtualbox
-    sudo apt install virtualbox
+    # sudo apt install virtualbox
     # download the DPKG https://www.virtualbox.org/wiki/Linux_Downloads
 
     # clone and install i3gem if the repo doesn't already exist
@@ -110,7 +117,8 @@ then
     fi
 
     # apps
-    sudo apt install -y arandr gnome-screenshot pm-utils pavucontrol zathura nmap gthumb xdotool
+    sudo apt install -y arandr gnome-screenshot pavucontrol zathura nmap gthumb xdotool xbindkeys
+    # pm-utils
 
     # libs, python3-tk is needed for Matplotlib
     sudo apt install -y npm nodejs python3-tk libncurses5 watchman
@@ -130,9 +138,7 @@ then
     # pipx install tldr powerline-shell
     # TODO: automate downloading a powerline-go release?
     wget https://github.com/justjanne/powerline-go/releases/download/v1.22.1/powerline-go-linux-amd64 -O ~/bin/powerline-go
-    chmod 
-
-    # TODO: flake8 in pip? 
+    chmod +x ~/bin/powerline-go
 
     # rofi file selector
     # sudo apt install fd-find xsel

@@ -16,11 +16,7 @@ enable_audio_bell no
 # italic_font      auto
 # bold_italic_font auto
 
-# Needed for `kitty @ ls` used in the dropdown terminal
-allow_remote_control yes
-listen_on unix:/tmp/kitty-socket
-
-font_size 15.0
+font_size 16.0
 
 font_features FiraCode-Regular +ss01 +ss02 +ss03 +ss04 +ss05 +ss07 +ss08 +zero +cv32 +cv26 +cv24 +cv31 +cv02 +cv30
 
@@ -71,9 +67,8 @@ symbol_map U+f101-U+f208 nonicon
 
 
 # BEGIN_KITTY_FONTS
-font_family      family='FiraCode Nerd Font Mono' postscript_name=FiraCodeNFM-Reg
+font_family      family="FiraCode Nerd Font Mono"
 bold_font        auto
 italic_font      auto
 bold_italic_font auto
 # END_KITTY_FONTS
-map shift+enter send_text all \e\r

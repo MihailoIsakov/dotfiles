@@ -3,8 +3,8 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LC_TYPE=en_US.UTF-8
 
-export VISUAL=vim
-export EDITOR=vim
+export VISUAL=nvim
+export EDITOR=nvim
 set -o vi
 set editing-mode vi
 set keymap vi-command
@@ -14,8 +14,7 @@ export WORKON_HOME=$HOME/.virtualenvs
 export VIRTUALENVWRAPPER_PYTHON='/usr/bin/python3'
 source "/home/mihailo/.local/bin/virtualenvwrapper.sh"
 
-# Created by `pipx` on 2022-01-21 17:21:54
-export PATH="$PATH:/home/mihailo/.local/bin"
+source /home/mihailo/bin/rebuild_path.sh
 
 # Hide __pycache__ directories
 PYTHONPYCACHEPREFIX="."
@@ -33,7 +32,7 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # color the cursor for better visibility
-# echo -ne '\e]12;orange\a'
+echo -ne '\e]12;orange\a'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -74,7 +73,7 @@ shopt -s checkwinsize
 #shopt -s globstar
 
 # Jump (https://github.com/gsamokovarov/jump) shell integration
-eval "$(jump shell)"
+# eval "$(jump shell)"
 
 # ssh agent 
 if [ -f ~/.ssh/agent.env ] ; then
@@ -112,14 +111,15 @@ bind 'set match-hidden-files off'
 # source ~/bin/git-completion.bash
 
 # Fuzzy search autocompletion and terminal key bindings
-# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export FZF_COMPLETION_OPTS='--border --info=inline'
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # Second attempt at FZF
 # source ~/bin/fzf-bash-completion.sh
 # bind -x '"\t": fzf_bash_completion'
 
 # github copilot CLI
-eval "$(github-copilot-cli alias -- "$0")"
+# eval "$(github-copilot-cli alias -- "$0")"
 
 ######################
 # Powerline-go shell #
@@ -140,4 +140,16 @@ function _update_ps1() {
 if [ "$TERM" != "linux" ] && [ -f "/home/mihailo/bin/powerline-go" ]; then
     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 fi
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+. "$HOME/.cargo/env"
+
+export WANDB_ENTITY="mihailo"
+
+[ -f ~/.secrets ] && source ~/.secrets
+
+source '/home/mihailo/.bash_completions/bside.sh'
 

@@ -16,37 +16,16 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
-
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
+source /home/mihailo/bin/rebuild_path.sh
 
 # if an ssh session
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     source .sshrc
 fi
 
-# add usr local bin
-PATH=$PATH:/usr/local/bin/
-
-# setup screens
-# /home/mihailo/.screenlayout/lab.sh
-
-# TODO: move to i3 config
-# faster keyboard
-xset r rate 180 60
-
 # Bash history
 HISTSIZE=100000
 HISTFILESIZE=100000
-
-# Created by `pipx` on 2022-01-21 17:21:54
-export PATH="$PATH:/home/mihailo/.local/bin"
 
 # Virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
@@ -65,6 +44,6 @@ export CXX=g++
 export SYSTEMC_HOME=/opt/systemc
 export SYSTEMC_INCLUDE=/opt/systemc/include
 export SYSTEMC_LIBDIR=/opt/systemc/lib
-# export VERILATOR_BIN=/home/mihailo/dev/boolsi/verilate/scripts/verilator/bin
 
+. "$HOME/.cargo/env"
 

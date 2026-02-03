@@ -1,5 +1,29 @@
 # moving around
-alias cd='cd -P'
+# alias cd='cd -P'
+
+cd() {
+    builtin cd -P "$@" || return
+    _update_terminal_bg_for_git
+}
+
+_update_terminal_bg_for_git() {
+    local branch
+    if branch=$(git symbolic-ref --short HEAD 2>/dev/null); then
+        local hash=$(echo -n "$branch" | cksum | cut -d' ' -f1)
+        local r=$(( (hash         % 50) + 30 ))
+        local g=$(( (hash / 256   % 50) + 30 ))
+        local b=$(( (hash / 65536 % 50) + 30 ))
+        printf '\033]11;#%02x%02x%02x\007' "$r" "$g" "$b"
+    else
+        # Not a git repo or detached HEAD - reset to default (black)
+        printf '\033]11;#2e2e2e\007'
+        # printf '\033]11;#000000\007'
+    fi
+}
+
+# Run on shell startup to set initial color
+_update_terminal_bg_for_git
+
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ..2='cd ../..'
@@ -26,8 +50,12 @@ alias open='xdg-open'
 alias xclip='xclip -sel clip'
 
 # git stuff
-alias log="git log --graph --branches --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all --decorate"
+# alias log="git log --graph --branches --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all --decorate"
+alias log="git log --graph --branches --pretty=format:'%C(yellow)%h%Creset %C(bold blue)<%an>%Creset %Cgreen(%cr)%Creset -%C(auto)%d%Creset %s' --abbrev-commit --date=relative --all --decorate"
+alias logg="git log --graph --branches --simplify-by-decoration --pretty=format:'%C(yellow)%h%Creset %C(bold blue)<%an>%Creset %Cgreen(%cr)%Creset -%C(auto)%d%Creset %s' --abbrev-commit --date=relative --all --decorate"
+# alias logg="git log --graph --oneline --all --simplify-by-decoration --date=relative"
 alias gs='git status'
+alias gb="git for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'"
 alias diff='git diff -w'
 alias diffw='git diff --word-diff'
 alias diffwd='git diff --word-diff-regex=.'
@@ -43,12 +71,14 @@ alias pull='git pull'
 alias gtc='git show --name-only'
 alias push='git push'
 alias amend='git commit --amend'
+alias gprunesquashmerged='git checkout -q main && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base main $branch) && [[ $(git cherry main $(git commit-tree $(git rev-parse "$branch^{tree}") -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
 
 # rg follow symlinks
 alias rg='rg -L'
 
 # language specific tools
 alias ipy='ipython'
+alias pc='uv run pre-commit'
 # Activate, assuming that ~/bin/source_venv exists
 alias activate='source source_venv'
 
@@ -56,7 +86,8 @@ alias activate='source source_venv'
 shopt -s expand_aliases
 
 # clear vim since kitty sometimes mangles the terminal outputs
-alias vim='clear; nvim'
+# alias vim='clear; nvim'
+alias vim='nvim'
 
 # kitty clipboard
 alias cb='kitty +kitten clipboard'
@@ -82,3 +113,6 @@ feature() {
 bug() {
         gh issue create --title "$*" --body "" --label "bug"
 }
+
+# I keep making this mistake, so might as well:
+alias :q=exit
