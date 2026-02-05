@@ -1,3 +1,9 @@
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
 export LANGUAGE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -49,12 +55,6 @@ fi
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
-
-# If not running interactively, don't do anything
-case $- in
-    *i*) ;;
-      *) return;;
-esac
 
 # don't put duplicate lines or lines starting with space in the history. See bash(1) for more options
 # HISTCONTROL=ignoreboth
@@ -151,5 +151,5 @@ export WANDB_ENTITY="mihailo"
 
 [ -f ~/.secrets ] && source ~/.secrets
 
-source '/home/mihailo/.bash_completions/bside.sh'
+# source '/home/mihailo/.bash_completions/bside.sh'
 
