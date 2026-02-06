@@ -20,7 +20,7 @@ source /home/mihailo/bin/rebuild_path.sh
 
 # if an ssh session
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-    source .sshrc
+    source ~/.sshrc
 fi
 
 # Bash history
