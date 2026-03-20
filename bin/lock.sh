@@ -1,21 +1,13 @@
-#! /bin/bash
-
-# Take a screenshot
-# scrot /tmp/screen_locked.png
-gnome-screenshot -f /tmp/screen_locked.png
-
-# Pixellate it 10x / corrupt it
-# mogrify -scale 10% -scale 1000% /tmp/screen_locked.png
-corrupter /tmp/screen_locked.png /tmp/screen_locked.png
-
-# Pause dunst
+#!/bin/bash
 dunstctl set-paused true
 
-# Lock screen displaying this image.
-i3lock -i /tmp/screen_locked.png
+env \
+  XSECURELOCK_SAVER="$HOME/bin/lock-saver.sh" \
+  XSECURELOCK_SHOW_DATETIME=1 \
+  XSECURELOCK_DATETIME_FORMAT="%H:%M" \
+  XSECURELOCK_BLANK_TIMEOUT=300 \
+  XSECURELOCK_BLANK_DPMS_STATE="off" \
+  XSECURELOCK_NO_COMPOSITE=1 \
+  xsecurelock
 
-# Resume dunst
 dunstctl set-paused false
-
-# Turn the screen off after a delay.
-sleep 60; pgrep i3lock && xset dpms force off
