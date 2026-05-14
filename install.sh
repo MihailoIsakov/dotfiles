@@ -20,7 +20,7 @@ mkdir -p ~/libs/
 ################################################
 # bare necessities, possibly tied into configs #
 ################################################
-sudo apt install -y neovim bash-completion mosh wget curl htop python3.11 python3-pip python3.11-venv ripgrep
+sudo apt install -y neovim bash-completion mosh wget curl htop ripgrep
 
 # FZF Fuzzy search
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && ~/.fzf/install
@@ -29,6 +29,7 @@ git config --global user.email "isakov.m@gmail.com"
 git config --global user.name  "Mihailo Isakov"
 git config --global core.editor "nvim"
 git config pull.rebase false  # merge strategy
+git config --global diff.external difft  # difftastic diffs (binary lives in bin/)
 
 ###########################
 # Laptop power management #
@@ -117,12 +118,11 @@ then
     fi
 
     # apps
-    sudo apt install -y arandr gnome-screenshot pavucontrol zathura nmap gthumb xdotool xbindkeys
+    sudo apt install -y arandr gnome-screenshot pavucontrol zathura nmap gthumb xdotool xbindkeys network-manager-applet hsetroot
     # pm-utils
 
     # libs, python3-tk is needed for Matplotlib
-    sudo apt install -y npm nodejs python3-tk libncurses5 watchman
-
+    sudo apt install -y npm nodejs python3-tk libncurses6 watchman
 
     # fonts
     sudo apt install -y fonts-firacode fonts-powerline
